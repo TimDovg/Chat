@@ -19,6 +19,7 @@
 
         .heder-text {
             font-family: 'Raleway', sans-serif;
+            font-size: 1.1em;
         }
 
         header {
@@ -38,7 +39,7 @@
         }
 
         img[src="img/logo.svg"] {
-            width: 11%;
+            width: 170px;
             margin-left: 100px;
             cursor: pointer;
         }
@@ -49,7 +50,7 @@
 
         .time {
             font-size: 0.7em;
-            margin-top: 10px;
+            margin-top: 13px;
             text-align: right;
         }
 
@@ -67,6 +68,97 @@
             margin-right: 100px;
         }
 
+        section {
+            height: 745px;
+            margin-right: 200px;
+            margin-left: 200px;
+            margin-top: 5px;
+        }
+
+        aside {
+            width: 25%;
+            height: 745px;
+            background: aqua;
+            float: left;
+            display: flex;
+            flex-direction: column;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .main {
+            width: 75%;
+            height: 745px;
+            display: flex;
+            flex-direction: column;
+            background: #BBBEC0;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .message {
+            border-top: 2px solid black;
+            height: 100px;
+            background: #2E3248;
+            border-bottom-right-radius: 10px;
+            display: flex;
+        }
+
+        aside div {
+            height: 50px;
+            background: black;
+            border-bottom: 1px solid white;
+            cursor: pointer;
+        }
+
+        aside div:first-child {
+            border-top-left-radius: 10px;
+            height: 100px;
+        }
+
+        .display-message {
+            height: 645px;
+            background-color: brown;
+            border-top-right-radius: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            width: 100%;
+            height: 25px;
+            background-color: greenyellow;
+            border-top-right-radius: 10px;
+        }
+
+        .tabs div{
+            border-right: 1px solid black;
+            background-color: green;
+            width: 120px;
+            cursor: pointer;
+        }
+
+
+        textarea:focus {
+            outline: none;
+        }
+
+        .emoji {
+            width: 100px;
+            height: 20px;
+            background-color: darkgoldenrod;
+        }
+
+        .formatting {
+            width: 100px;
+            height: 20px;
+            background-color: coral;
+        }
+
+        .typing-info {
+            width: 200px;
+            height: 50px;
+            background-color: darkmagenta;
+        }
     </style>
 </head>
 <body>
@@ -75,7 +167,7 @@
     <div class="profile">
         <div class="user">
             <img src="img/user.svg" alt="user">
-            Мой профиль         <!--or registration-->
+            <span class="heder-text">Мой профиль</span>         <!--or registration-->
         </div>
         <div class="hide">
             <span>Личные сообщения 1</span>
@@ -90,5 +182,47 @@
         <div class="time">Время: <time>12:00:00</time> (в онлайне: <time>5 мин)</time></div>
     </div>
 </header>
+<section>
+    <aside>
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+    </aside>
+    <div class="main">
+        <div class="display-message">
+            <div class="tabs">
+                <div>
+
+                </div>
+                <div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="message">
+            <div class="emoji">
+
+            </div>
+            <div>
+                <textarea rows="3"></textarea>
+                <div class="typing-info">
+                </div>
+            </div>
+            <div>
+                <div class="formatting">
+
+                </div>
+                <button type="submit">Отправить</button>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
