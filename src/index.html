@@ -7,44 +7,87 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ChatFast</title>
     <style rel="stylesheet">
+        @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
         body {
             margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F2F5F7;
+            color: #E2E5E7;
+        }
+
+        .heder-text {
+            font-family: 'Raleway', sans-serif;
         }
 
         header {
-            height: 100px;
-            border: 3px solid black;
+            height: 60px;
             background: #2E3248;
+            border-bottom: 2px solid black;
 
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
         }
 
-        header div img:not(:first-child) {
-            width: 1.5%;
+        img[src="img/user.svg"] {
+            width: 5%;
+            position: relative;
+            top: 4px;
+            margin-right: 2px;
         }
 
-        header img:first-child {
-            width: 20%;
+        img[src="img/logo.svg"] {
+            width: 11%;
+            margin-left: 100px;
+            cursor: pointer;
         }
+
+        .hide {
+            display: none;
+        }
+
+        .time {
+            font-size: 0.7em;
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .user {
+            text-align: right;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .user:hover {
+            color: #BBBEC0;
+        }
+
+        .profile {
+            margin-right: 100px;
+        }
+
     </style>
 </head>
 <body>
 <header>
     <img src="img/logo.svg" alt="logo">
-    <div>
-        <img src="img/user.svg" alt="user">
-        Мой профиль
-        Личные сообщения 1
-        Редактировать профиль
-        <hr>
-        Поддержка
-        Выйти
-        <img src="img/google-plus.svg" alt="google-plus">
-        <img src="img/instagram.svg" alt="instagram">
-        <img src="img/facebook.svg" alt="facebook">
-        Время: <time>12:00:00</time><br>
-        В онлайне: <time>00:00:30</time>
+    <div class="profile">
+        <div class="user">
+            <img src="img/user.svg" alt="user">
+            Мой профиль         <!--or registration-->
+        </div>
+        <div class="hide">
+            <span>Личные сообщения 1</span>
+            <span>Редактировать профиль</span>
+            <hr>
+            <span>Поддержка</span>
+            <span>Выйти</span>
+        </div>
+<!--        <img src="img/google-plus.svg" alt="google-plus">-->
+<!--        <img src="img/instagram.svg" alt="instagram">-->
+<!--        <img src="img/facebook.svg" alt="facebook">-->
+        <div class="time">Время: <time>12:00:00</time> (в онлайне: <time>5 мин)</time></div>
     </div>
 </header>
 </body>
