@@ -1,12 +1,51 @@
-<!DOCTYPE html>
-<html lang="En-Eu">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-    <title>Webpack starter</title>
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ChatFast</title>
+    <style rel="stylesheet">
+        body {
+            margin: 0;
+        }
+
+        header {
+            height: 100px;
+            border: 3px solid black;
+            background: #2E3248;
+
+            display: flex;
+            justify-content: space-around;
+        }
+
+        header div img:not(:first-child) {
+            width: 1.5%;
+        }
+
+        header img:first-child {
+            width: 20%;
+        }
+    </style>
 </head>
 <body>
+<header>
+    <img src="img/logo.svg" alt="logo">
+    <div>
+        <img src="img/user.svg" alt="user">
+        Мой профиль
+        Личные сообщения 1
+        Редактировать профиль
+        <hr>
+        Поддержка
+        Выйти
+        <img src="img/google-plus.svg" alt="google-plus">
+        <img src="img/instagram.svg" alt="instagram">
+        <img src="img/facebook.svg" alt="facebook">
+        Время: <time>12:00:00</time><br>
+        В онлайне: <time>00:00:30</time>
+    </div>
+</header>
 </body>
 </html>
