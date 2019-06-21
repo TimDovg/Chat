@@ -25,7 +25,7 @@
 
         header {
             height: 60px;
-            background: #2E3248;
+            background-color: #41456D;
             border-bottom: 2px solid black;
 
             display: flex;
@@ -62,7 +62,7 @@
         }
 
         .user:hover {
-            color: #BBBEC0;
+            color: white;
         }
 
         .profile {
@@ -73,14 +73,14 @@
             height: 745px;
             margin-right: 200px;
             margin-left: 200px;
-            margin-top: 5px;
+            margin-top: 10px;
+            display: flex;
         }
 
         aside {
             width: 25%;
             height: 745px;
-            background: aqua;
-            float: left;
+            background: #41456D;
             display: flex;
             flex-direction: column;
             border-top-left-radius: 10px;
@@ -98,9 +98,9 @@
         }
 
         .message-sending {
-            border-top: 2px solid black;
+            border-top: 1px solid black;
             height: 100px;
-            background: #2E3248;
+            background: #9ECC87;
             border-bottom-right-radius: 10px;
             display: flex;
             justify-content: center;
@@ -113,57 +113,79 @@
 
         aside div {
             height: 50px;
-            background: black;
+            background: #2E325A;
         }
         aside div.friend {
             border-bottom: 1px solid white;
             cursor: pointer;
         }
+        aside div.friend:nth-child(2) {
+            border-top: 1px solid white;
+        }
+
         aside div:not(:first-child):hover {
-            color: #BBBEC0;
+            color: white;
         }
 
         aside div:first-child {
             border-top-left-radius: 10px;
-            height: 100px;
+            height: 110px;
+            padding-bottom: 10px;
         }
 
         .display-message {
             height: 645px;
-            background-color: brown;
+            background-color: #E5EEFF;
             border-top-right-radius: 10px;
+
         }
 
         .tabs {
             display: flex;
             width: 100%;
             height: 25px;
-            background-color: greenyellow;
+            background-color: #E5EEFF;
             border-top-right-radius: 10px;
+            border-bottom: 1px solid black;
         }
 
         .tabs div{
-            background-color: green;
+            background-color: #D5DEEF;
             width: 120px;
             cursor: pointer;
+            color: black;
             text-align: center;
             font-size: 0.9em;
             padding-top: 4px;
             margin-right: 2px;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+
+        .tabs div:first-child {
+            margin-left: 2px;
         }
 
         .tabs div:hover {
-            color: #BBBEC0;
+            color: white;
         }
 
         textarea:focus {
             outline: none;
+            box-shadow: inset 0 0 3px 0px #396722;
+        }
+
+        textarea:active {
+            box-shadow: inset 0 0 3px 0px #396722;
         }
 
         textarea {
             width: 300px;
             height: 52px;
             margin-right: 5px;
+            border-radius: 5px;
+            background-color: #F6FFDF;
+            resize: none;
         }
 
         .emoji {
@@ -177,7 +199,7 @@
         }
 
         [data-img="edit"] {
-            width: 14px;
+            width: 12px;
         }
 
         [data-img="edit"]:not(:last-child) {
@@ -193,6 +215,7 @@
             width: 306px;
             height: 16px;
             font-size: 0.6em;
+            color: black;
         }
 
         .typing-info div{
@@ -213,9 +236,10 @@
 
         .message {
             font-size: 0.9em;
-            background-color: #2E3248;
+            background-color: #F8FBFB;
             padding: 15px;
             margin-top: 15px;
+            color: black;
             max-width: 400px;
             text-align: left;
         }
@@ -277,7 +301,7 @@
         }
 
         .create-group:hover {
-            color: #BBBEC0;
+            color: white;
         }
 
         aside div:first-child {
@@ -289,17 +313,82 @@
             padding-left: 15px;
         }
 
-        .search input[type="submit"] {
-            width: 70px;
+        .search button {
+            width: 65px;
+            height: 22px;
             margin-left: 5px;
+            font-size: 0.85em;
+            padding-left: 0px;
+            padding-right: 0px;
+            background-color: #F2F5F7;
+        }
+
+        input[type="search"] {
+            border-radius: 2px;
+            border: 1px solid black;
+            height: 22px;
+            padding-left: 3px;
+            background-color: #F2F5F7;
+        }
+
+        input[type="search"]:focus {
+            outline: none;
+            box-shadow: inset 0 0 3px 0px #12163E;
         }
 
         button {
+            background: white;
+            border: 1px solid #666;
+            border-radius: 10px;
+        }
+
+        .message-sending button {
             position: relative;
             top: 14px;
             width: 90px;
             height: 25px;
-            border-radius: 10px;
+            background-color: #F6FFDF;
+        }
+
+        button:hover {
+            cursor: pointer;
+            background: #E7E7E7;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button:active {
+            box-shadow: inset 0 0 2px 0;
+        }
+
+        img[data-img="status"] {
+            width: 10px !important;
+            margin-left: 5px !important;
+        }
+
+        .now-online {
+            margin-left: 15px;
+            cursor: default;
+        }
+
+        .now-online:hover {
+            color: #E2E5E7 !important;
+        }
+
+        .shadow {
+            width: 5px;
+            height: 745px;
+            background-color: #41456D;
+            box-shadow: inset -3px 0px 3px 0px #12163E;
+        }
+
+        .up-shadow {
+            width: 5px;
+            height: 325px;
+            background-color: #2E325A;
+            box-shadow: inset -3px 0px 3px 0px #12163E;
         }
     </style>
 </head>
@@ -327,26 +416,35 @@
 <section>
     <aside>
         <div>
-            <div class="create-group">
+            <div class="create-group" >
                 Создать группу
             </div>
             <div class="search">
                 <p>
                     <input type="search" placeholder="Поиск чата">
-                    <input type="submit" value="Найти">
+                    <button type="submit">Найти</button>
                 </p>
             </div>
-            <div>Сейчас в онлайне: 15<img src="img/online.svg"> </div>
+            <div class="now-online">Сейчас в онлайне: &nbsp;2<img src="img/online.svg" data-img="status"></div>
         </div>
         <div class="friend">
             <img src="img/leo.jpg" alt="leo">
-            Ди Каприо
+            Ди Каприо <img src="img/online.svg" data-img="status">
         </div>
         <div class="friend">
             <img src="img/statham.jpg" alt="statham">
-            Стэтхэм
+            Стэтхэм <img src="img/offline.svg" data-img="status">
+        </div>
+        <div class="friend">
+            <img src="img/clark.jpg" alt="clark">
+            Кларк <img src="img/leave.svg" data-img="status">
+        </div>
+        <div class="friend">
+            <img src="img/pikachu.jpg" alt="pikachu">
+            Пикачу <img src="img/online.svg" data-img="status">
         </div>
     </aside>
+    <div class="shadow"><div class="up-shadow"></div></div>
     <div class="main">
         <div class="display-message">
             <div class="tabs">
