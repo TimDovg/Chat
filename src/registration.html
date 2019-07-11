@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ChatFast - registration</title>
     <link rel="shortcut icon" href="title-icon.ico" type="image/x-icon">
+    <script src="js/index.js"></script>
     <style rel="stylesheet">
         @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
@@ -74,10 +75,10 @@
     <form method="POST">
       <div>Пожалуйста, войдите в свой аккаунт или зарегистрируйтесь</div><br>
         <div>Введите ваше имя:</div>
-        <input type="text" name="username"><br><br>
+        <input id="user" type="text" name="username"><br><br>
         <div>Введите пароль:</div>
         <input type="password"><br><br>
-        <button>Войти</button><br>
+        <button onclick="checkUser()">Войти</button><br>
         <button>Зарегистрироваться</button>
     </form>
 </body>
