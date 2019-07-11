@@ -44,3 +44,43 @@ function displayUsers() {
             '        </div>';
     }
 }
+
+
+function sendMessage() {
+    // получение массива сообщений
+    let messages = [];
+
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://studentschat.herokuapp.com/messages', true);
+
+    request.onload = function() {
+        if (request.status >= 200 && request.status < 400) {
+            // Обработчик успещного ответа
+            var response = request.responseText;
+            userList = Response;
+
+            let usersGet = JSON.parse(response).map(
+                function (obj) {
+                    return obj;
+                }
+            )
+
+            for (let i = 0; i < usersGet.length; i++) {
+                messages.push({});
+                for (key in usersGet[i]) {
+                    messages[i][key] = usersGet[i][key];
+                }
+            }
+
+        } else {
+            // Обработчик ответа в случае ошибки
+        }
+    };
+    request.onerror = function() {
+        // Обработчик ответа в случае неудачного соеденения
+    };
+    request.send();
+
+    console.log(messages);
+    alert(messages[0]);
+}
