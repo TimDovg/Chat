@@ -1,115 +1,46 @@
-/*
-import 'babel-polyfill';
-import _ from 'lodash';
+// вывод времени и подсчет вермени в онлайне
+let min = -1;
+window.onload = function(){
+    (function(){
+        let date = new Date();
+        let time = date.getHours() + ':' + date.getMinutes() + ':' + ('0' + date.getSeconds()).slice(-2);
+        document.getElementById('time-now').innerHTML = time;
+        window.setTimeout(arguments.callee, 1000);
+    })();
 
-import './../sass/styles.scss';
-
-const getHeader = () => {
-  const helloWebpack = _.join(['Hello', 'webpack!'], ' ');
-  console.log(helloWebpack);
-  const element = document.createElement('h1');
-
-  element.innerHTML = helloWebpack;
-
-  return element;
+    (function(){
+        min++;
+        let timeInOnline = min + ' мин)';
+        document.getElementById('time-in-online').innerHTML = timeInOnline;
+        window.setTimeout(arguments.callee, 60000);
+    })();
 };
 
-document.body.appendChild(getHeader());
+// подсчет активных пользователей
+setTimeout(countActive, 100);
+    function countActive() {
+        let active = 0;
 
-const o = {
-  foo: {
-    bar: null
-  }
-};
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].status === "active") active++;
+        }
 
-console.log(o?.foo?.bar?.baz ?? 'default');
-*/
-
-
-/*
-const API_URL = 'https://studentschat.herokuapp.com/';
-
-async function startApp() {
-  try {
-    const endpoint = 'users';
-    const users = await callApi(endpoint, 'GET');
-    return getUsersNames(users);
-  } catch (error) {
-    console.warn(error);
-  } finally {
-
-  }
-}
-
-function callApi(endpoind, method) {
-  const url = API_URL + endpoind;
-  const options = {
-    method
-  };
-
-  return fetch(url, options)
-      .then(response => response.ok ? response.json() : Promise.reject(Error('Failed to load')))
-      .then(file => JSON.parse(atob(file.content)))
-      .catch(error => { throw error });
-}
-
-function getUsersNames(users) {
-  const names = users.map(it => it.username).join('\n');
-  return names;
-}
-startApp();*/
-
-
-  let usernames = [];
-
-  var request = new XMLHttpRequest();
-  request.open('GET', 'https://studentschat.herokuapp.com/users', true);
-
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400) {
-      // Обработчик успещного ответа
-      var response = request.responseText;
-      userList = Response;
-
-      let users = JSON.parse(response).map(
-          function (obj) {
-            return obj.username;
-          }
-      )
-
-      for (let i = 0; i < users.length; i++) {
-        usernames.push(users[i]);
-      }
-
-    } else {
-      // Обработчик ответа в случае ошибки
+        document.getElementById('active-users').innerHTML = active;
     }
-  };
-  request.onerror = function() {
-    // Обработчик ответа в случае неудачного соеденения
-  };
-  request.send();
 
+// вывод пользователей
+setTimeout(displayUsers, 100);
+function displayUsers() {
+    let status = '';
+    let img = "img/noname.jpg";
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].status === "active") status = "img/online.svg";
+        if (users[i].status === "leave") status = "img/leave.svg";
+        if (users[i].status === "offline") status = "img/offline.svg";
 
-function checkUser() {
-  var user = document.getElementsByTagName("input")[0];
-  user = user.value;
-
-  let allow = false;
-  usernames.forEach(
-      function (usr) {
-        if (usr == user) allow = true;
-      }
-  );
-
-  if (allow) {
-    alert('Привет, ' + user + '!');
-    window.location.replace("index.html");
-  }
-  else {
-    alert('Пользователь не найден! \n' +
-      'Пожалуйста, зарегистрируйтесь!');
-    document.location.href = '/index.html';
-  }
-
+        document.getElementById('friends').innerHTML += '<div class="friend">\n' +
+            '            <img src='+img+' alt='+img+'>\n' + users[i].username +
+            '             <img src='+status+' data-img="status">\n' +
+            '        </div>';
+    }
 }

@@ -11,7 +11,7 @@ const distPath = path.join(__dirname, '/public');
 
 const config = {
   entry: {
-    main: './src/js/index.js'
+    main: './src/js/forreg.js'
   },
   output: {
     filename: 'bundle.js',
