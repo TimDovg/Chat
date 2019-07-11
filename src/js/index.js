@@ -104,9 +104,12 @@ function checkUser() {
 
   if (allow) {
     alert('Привет, ' + user + '!');
-    window.location.replace("https://timdovg.github.io/Chat/src/index.html");
+    window.location.href = "https://timdovg.github.io/Chat/src/index.html";;
   }
-  else alert('Пользователь не найден! \n' +
+  else {
+    alert('Пользователь не найден! \n' +
       'Пожалуйста, зарегистрируйтесь!');
+    window.location.href = "https://timdovg.github.io/Chat/src/registration.html";
+  }
 
 }
