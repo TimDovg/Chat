@@ -16,9 +16,10 @@ window.onload = function(){
     })();
 };
 
+
+
 // подсчет активных пользователей
-setTimeout(countActive, 100);
-    function countActive() {
+
         let active = 0;
 
         for (let i = 0; i < users.length; i++) {
@@ -26,29 +27,54 @@ setTimeout(countActive, 100);
         }
 
         document.getElementById('active-users').innerHTML = active;
-    }
 
 // вывод пользователей
-setTimeout(displayUsers, 100);
-function displayUsers() {
     let status = '';
     let img = "img/noname.jpg";
     for (let i = 0; i < users.length; i++) {
         if (users[i].status === "active") status = "img/online.svg";
         if (users[i].status === "leave") status = "img/leave.svg";
-        if (users[i].status === "offline") status = "img/offline.svg";
+        if (users[i].status === "inactive") status = "img/offline.svg";
 
         document.getElementById('friends').innerHTML += '<div class="friend">\n' +
             '            <img src='+img+' alt='+img+'>\n' + users[i].username +
             '             <img src='+status+' data-img="status">\n' +
             '        </div>';
     }
+
+
+
+    // подсчет введенных символов
+
+function count() {
+    let string = document.getElementById('text').value;
+    let space = 0;
+    let allChars = string.length;
+    let stopChars = 0;
+    let letters = 0;
+    let compareLetters = /[A-Z]|[a-z]|[а-я]|[А-Я]/;
+
+    for (let i = 0; i < string.length; i++){
+        if (string[i] === ' ') space++;
+        if (string[i] === '.' || string[i] === ',' || string[i] === '!' || string[i] === '?' || string[i] === ':' || string[i] === ';'
+            || string[i] === '-') stopChars++;
+        if (compareLetters.test(string[i])) letters++;
+    }
+
+    document.getElementById('space').innerHTML = space;
+    document.getElementById('allChars').innerHTML = allChars;
+    document.getElementById('stopChars').innerHTML = stopChars;
+    document.getElementById('letters').innerHTML = letters;
 }
 
 
+
+// отправка сообщений
 function sendMessage() {
     // получение массива сообщений
     let messages = [];
+
+    if (document.getElementById('text').value.length >= 500) return alert('Максимальная длина сообщения 500 символов!');
 
     var request = new XMLHttpRequest();
     request.open('GET', 'https://studentschat.herokuapp.com/messages', true);

@@ -1,69 +1,7 @@
-/*
-import 'babel-polyfill';
-import _ from 'lodash';
-
-import './../sass/styles.scss';
-
-const getHeader = () => {
-  const helloWebpack = _.join(['Hello', 'webpack!'], ' ');
-  console.log(helloWebpack);
-  const element = document.createElement('h1');
-
-  element.innerHTML = helloWebpack;
-
-  return element;
-};
-
-document.body.appendChild(getHeader());
-
-const o = {
-  foo: {
-    bar: null
-  }
-};
-
-console.log(o?.foo?.bar?.baz ?? 'default');
-*/
-
-
-/*
-const API_URL = 'https://studentschat.herokuapp.com/';
-
-async function startApp() {
-  try {
-    const endpoint = 'users';
-    const users = await callApi(endpoint, 'GET');
-    return getUsersNames(users);
-  } catch (error) {
-    console.warn(error);
-  } finally {
-
-  }
-}
-
-function callApi(endpoind, method) {
-  const url = API_URL + endpoind;
-  const options = {
-    method
-  };
-
-  return fetch(url, options)
-      .then(response => response.ok ? response.json() : Promise.reject(Error('Failed to load')))
-      .then(file => JSON.parse(atob(file.content)))
-      .catch(error => { throw error });
-}
-
-function getUsersNames(users) {
-  const names = users.map(it => it.username).join('\n');
-  return names;
-}
-startApp();*/
-
-
-  let usernames = [];
+let usernames = [];
 
   var request = new XMLHttpRequest();
-  request.open('GET', 'https://studentschat.herokuapp.com/users', true);
+  request.open('GET', 'https://studentschat.herokuapp.com/users', false);
 
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
@@ -129,7 +67,7 @@ function registerUser() {
   if (!allow) return alert('Пользователь с таким именем уже сущуствует!');
 
   var request1 = new XMLHttpRequest();
-  request1.open('POST', 'https://studentschat.herokuapp.com/users/register', true);
+  request1.open('POST', 'https://studentschat.herokuapp.com/users/register', false);
 
   request1.onload = function() {
     // Обработчик ответа в случае удачного соеденения

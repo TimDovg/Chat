@@ -108,7 +108,7 @@
             padding-top: 10px;
         }
 
-        .message-sending div:nth-child(2) {
+        .message-sending div:nth-child(2):not(.margin-default) {
             margin-right: 5px;
         }
 
@@ -116,6 +116,7 @@
             height: 50px;
             background: #2E325A;
         }
+
         .friend {
             border-bottom: 1px solid white;
             cursor: pointer;
@@ -185,7 +186,7 @@
             height: 52px;
             margin-right: 5px;
             border-radius: 5px;
-            background-color: #F6FFDF;
+            background-color: #F8FBFB;
             resize: none;
         }
 
@@ -221,11 +222,7 @@
 
         .typing-info div{
             float: right;
-        }
-
-        .typing-info div:first-child {
-            text-align: left;
-            width: 111.9px;
+            text-align: right;
         }
 
         img[src="img/cancel.svg"] {
@@ -321,7 +318,7 @@
             font-size: 0.85em;
             padding-left: 0px;
             padding-right: 0px;
-            background-color: #F2F5F7;
+            background-color: #F8FBFB;
         }
 
         input[type="search"] {
@@ -329,7 +326,7 @@
             border: 1px solid black;
             height: 22px;
             padding-left: 3px;
-            background-color: #F2F5F7;
+            background-color: #F8FBFB;
         }
 
         input[type="search"]:focus {
@@ -348,7 +345,7 @@
             top: 14px;
             width: 90px;
             height: 25px;
-            background-color: #F6FFDF;
+            background-color: #F8FBFB;
         }
 
         button:hover {
@@ -492,12 +489,12 @@
                 <img src="img/emoji/unhappy.svg" data-img="emoji">
             </div>
             <div>
-                <textarea></textarea>
+                <textarea id="text" autofocus onkeyup="count()"></textarea>
                 <div class="typing-info">
-                    Всего символов: 20
-                    <div>Невидемых: 5</div><br>
-                    Букв: 10
-                    <div>Знаков препинания: 2</div>
+                    Всего символов: <span id="allChars">0</span>
+                    <div class="margin-default">Невидемых: <span id="space">0</span></div><br>
+                    Букв: <span id="letters">0</span>
+                    <div>Знаков препинания: <span id="stopChars">0</span></div>
                 </div>
             </div>
             <div>
