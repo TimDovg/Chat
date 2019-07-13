@@ -6,7 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="title-icon.ico" type="image/x-icon">
-    <script src="js/uploadUsers.js"></script>
     <title>ChatFast</title>
     <style rel="stylesheet">
         @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
@@ -120,6 +119,7 @@
         .friend {
             border-bottom: 1px solid white;
             cursor: pointer;
+            min-height: 50px;
         }
         .friend:nth-child(2) {
             border-top: 1px solid white;
@@ -449,7 +449,7 @@
         <div class="display-message">
             <div class="tabs">
                 <div>
-                    chat 1 <img src="img/cancel.svg">
+                    MAIN <img src="img/cancel.svg">
                 </div>
                 <div>
                     chat 2 <img src="img/cancel.svg">
@@ -504,12 +504,13 @@
                     <img src="img/edit%20buttons/italics.svg" data-img="edit">
                     <img src="img/edit%20buttons/undelined.svg" data-img="edit">
                 </div>
-                <button type="submit" onclick="sendMessage()">Отправить</button>
+                <button onclick="sendMessage()">Отправить</button>
             </div>
         </div>
     </div>
 </section>
 
+<script src="js/uploadUsers.js"></script>
 <script src="js/index.js"></script>
 </body>
 </html>

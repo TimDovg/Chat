@@ -1,4 +1,5 @@
-let usernames = [];
+// аутентификация
+let usernames = []; // only names
 
   var request = new XMLHttpRequest();
   request.open('GET', 'https://studentschat.herokuapp.com/users', false);

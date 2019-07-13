@@ -3,7 +3,7 @@ let min = -1;
 window.onload = function(){
     (function(){
         let date = new Date();
-        let time = date.getHours() + ':' + date.getMinutes() + ':' + ('0' + date.getSeconds()).slice(-2);
+        let time = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
         document.getElementById('time-now').innerHTML = time;
         window.setTimeout(arguments.callee, 1000);
     })();
@@ -43,6 +43,41 @@ window.onload = function(){
     }
 
 
+//вывод сообщений
+let messages = []; // массив сообщений
+
+var request = new XMLHttpRequest();
+request.open('GET', 'https://studentschat.herokuapp.com/messages', true);
+
+request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+        // Обработчик успещного ответа
+        var response = request.responseText;
+        userList = Response;
+
+        let usersGet = JSON.parse(response).map(
+            function (obj) {
+                return obj;
+            }
+        )
+
+        for (let i = 0; i < usersGet.length; i++) {
+            messages.push({});
+            for (key in usersGet[i]) {
+                messages[i][key] = usersGet[i][key];
+            }
+        }
+
+    } else {
+        // Обработчик ответа в случае ошибки
+    }
+};
+request.onerror = function() {
+    // Обработчик ответа в случае неудачного соеденения
+};
+request.send();
+
+
 
     // подсчет введенных символов
 
@@ -71,42 +106,7 @@ function count() {
 
 // отправка сообщений
 function sendMessage() {
-    // получение массива сообщений
-    let messages = [];
-
     if (document.getElementById('text').value.length >= 500) return alert('Максимальная длина сообщения 500 символов!');
 
-    var request = new XMLHttpRequest();
-    request.open('GET', 'https://studentschat.herokuapp.com/messages', true);
-
-    request.onload = function() {
-        if (request.status >= 200 && request.status < 400) {
-            // Обработчик успещного ответа
-            var response = request.responseText;
-            userList = Response;
-
-            let usersGet = JSON.parse(response).map(
-                function (obj) {
-                    return obj;
-                }
-            )
-
-            for (let i = 0; i < usersGet.length; i++) {
-                messages.push({});
-                for (key in usersGet[i]) {
-                    messages[i][key] = usersGet[i][key];
-                }
-            }
-
-        } else {
-            // Обработчик ответа в случае ошибки
-        }
-    };
-    request.onerror = function() {
-        // Обработчик ответа в случае неудачного соеденения
-    };
-    request.send();
-
     console.log(messages);
-    alert(messages[0]);
 }
