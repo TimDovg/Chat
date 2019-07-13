@@ -340,10 +340,3 @@ img[data-img="status"] {
     background-color: #41456D;
     box-shadow: inset -3px 0px 3px 0px #12163E;
 }
-
-.up-shadow {
-    width: 5px;
-    height: 325px;
-    background-color: #2E325A;
-    box-shadow: inset -3px 0px 3px 0px #12163E;
-}
