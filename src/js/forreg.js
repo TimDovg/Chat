@@ -1,5 +1,9 @@
+document.getElementById('wrapp').style.display = "none";
+
 // аутентификация
 let usernames = []; // only names
+let userNow = ''; // пользователь, который вошел
+
 
   var request = new XMLHttpRequest();
   request.open('GET', 'https://studentschat.herokuapp.com/users', false);
@@ -42,13 +46,14 @@ function checkUser() {
   );
 
   if (allow) {
-    alert('Привет, ' + user + '!');
-    window.location.replace("https://timdovg.github.io/Chat/src/index.html");
+    userNow = user;
+    document.getElementById('userNow').innerHTML = 'Привет, ' + userNow + '!';
+    document.getElementById('registr').style.display = "none";
+    document.getElementById('wrapp').style.display = "block";
   }
   else {
     alert('Пользователь не найден! \n' +
       'Пожалуйста, зарегистрируйтесь!');
-    window.location.replace("https://timdovg.github.io/Chat/src/registration.html");
   }
 
 }
@@ -80,4 +85,6 @@ function registerUser() {
   request1.setRequestHeader('Content-Type', 'application/json');
 
   request1.send(JSON.stringify({username: user}));
+
+  window.location.reload();
 }

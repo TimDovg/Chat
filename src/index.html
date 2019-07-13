@@ -7,509 +7,101 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="title-icon.ico" type="image/x-icon">
     <title>ChatFast</title>
-    <style rel="stylesheet">
-        @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-        @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
-
-        body {
-            margin: 0;
-            font-family: Montserrat;
-            background-color: #F2F5F7;
-            color: #E2E5E7;
-            cursor: default;
-        }
-
-        .heder-text {
-            font-size: 1.1em;
-        }
-
-        header {
-            height: 60px;
-            background-color: #41456D;
-            border-bottom: 2px solid black;
-
-            display: flex;
-            justify-content: space-between;
-        }
-
-        img[src="img/user.svg"] {
-            width: 5%;
-            position: relative;
-            top: 4px;
-            margin-right: 2px;
-        }
-
-        img[src="img/logo.svg"] {
-            width: 170px;
-            margin-left: 100px;
-            cursor: pointer;
-        }
-
-        .hide {
-            display: none;
-        }
-
-        .time {
-            font-size: 0.7em;
-            margin-top: 13px;
-            text-align: right;
-        }
-
-        .user {
-            text-align: right;
-            cursor: pointer;
-            margin-top: 5px;
-        }
-
-        .user:hover {
-            color: white;
-        }
-
-        .profile {
-            margin-right: 100px;
-        }
-
-        section {
-            height: 745px;
-            margin-right: 200px;
-            margin-left: 200px;
-            margin-top: 10px;
-            display: flex;
-        }
-
-        aside {
-            width: 25%;
-            height: 745px;
-            background: #41456D;
-            display: flex;
-            flex-direction: column;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-        }
-
-        .main {
-            width: 75%;
-            height: 745px;
-            display: flex;
-            flex-direction: column;
-            background: #BBBEC0;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-
-        .message-sending {
-            border-top: 1px solid black;
-            height: 100px;
-            background: #9ECC87;
-            border-bottom-right-radius: 10px;
-            display: flex;
-            justify-content: center;
-            padding-top: 10px;
-        }
-
-        .message-sending div:nth-child(2):not(.margin-default) {
-            margin-right: 5px;
-        }
-
-        aside div {
-            height: 50px;
-            background: #2E325A;
-        }
-
-        .friend {
-            border-bottom: 1px solid white;
-            cursor: pointer;
-            min-height: 50px;
-        }
-        .friend:nth-child(2) {
-            border-top: 1px solid white;
-        }
-
-        aside div:not(:first-child):hover {
-            color: white;
-        }
-
-        aside div:first-child {
-            border-top-left-radius: 10px;
-            height: 110px;
-            padding-bottom: 10px;
-        }
-
-        .display-message {
-            height: 645px;
-            background-color: #E5EEFF;
-            border-top-right-radius: 10px;
-
-        }
-
-        .tabs {
-            display: flex;
-            width: 100%;
-            height: 25px;
-            background-color: #E5EEFF;
-            border-top-right-radius: 10px;
-            border-bottom: 1px solid black;
-        }
-
-        .tabs div{
-            background-color: #D5DEEF;
-            width: 120px;
-            cursor: pointer;
-            color: black;
-            text-align: center;
-            font-size: 0.9em;
-            padding-top: 4px;
-            margin-right: 2px;
-            border-top-right-radius: 5px;
-            border-top-left-radius: 5px;
-        }
-
-        .tabs div:first-child {
-            margin-left: 2px;
-        }
-
-        .tabs div:hover {
-            color: white;
-        }
-
-        textarea:focus {
-            outline: none;
-            box-shadow: inset 0 0 3px 0px #396722;
-        }
-
-        textarea:active {
-            box-shadow: inset 0 0 3px 0px #396722;
-        }
-
-        textarea {
-            width: 300px;
-            height: 52px;
-            margin-right: 5px;
-            border-radius: 5px;
-            background-color: #F8FBFB;
-            resize: none;
-        }
-
-        .emoji {
-            width: 90px;
-            height: 80px;
-            margin-right: 5px;
-        }
-
-        [data-img="emoji"] {
-            width: 18px;
-        }
-
-        [data-img="edit"] {
-            width: 12px;
-        }
-
-        [data-img="edit"]:not(:last-child) {
-            margin-right: 7px;
-        }
-        .formatting {
-            width: 85px;
-            height: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .typing-info {
-            width: 306px;
-            height: 16px;
-            font-size: 0.6em;
-            color: black;
-        }
-
-        .typing-info div{
-            float: right;
-            text-align: right;
-        }
-
-        img[src="img/cancel.svg"] {
-            width: 10px;
-            float: right;
-            margin-top: 4px;
-            margin-right: 5px;
-        }
-
-        .message {
-            font-size: 0.9em;
-            background-color: #F8FBFB;
-            padding: 15px;
-            margin-top: 15px;
-            color: black;
-            max-width: 400px;
-            text-align: left;
-        }
-
-        .right {
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            margin-left: auto;
-            margin-right: 10px;
-        }
-
-        .left {
-            margin-right: auto;
-            border-top-right-radius: 5px;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            margin-left: 90px;
-        }
-
-        .messages-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .messages-container img {
-            width: 70px;
-            border-radius: 50%;
-            margin-top: 12px;
-            margin-left: 10px;
-            float: left;
-        }
-
-        .messages-container :first-child {
-            max-width: 435px;
-        }
-
-        aside div:not(:first-child) img {
-            width: 35px;
-            border-radius: 50%;
-            margin-left: 15px;
-            margin-right: 10px;
-        }
-
-        aside div:not(:first-child) {
-            display: flex;
-            align-items: center;
-            font-size: 0.9em;
-        }
-
-        .create-group {
-            padding: 3px;
-            margin-top: 10px;
-            margin-left: 10px;
-            width: 135px;
-            color: #E2E5E7;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .create-group:hover {
-            color: white;
-        }
-
-        aside div:first-child {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .search {
-            padding-left: 15px;
-        }
-
-        .search button {
-            width: 65px;
-            height: 22px;
-            margin-left: 5px;
-            font-size: 0.85em;
-            padding-left: 0px;
-            padding-right: 0px;
-            background-color: #F8FBFB;
-        }
-
-        input[type="search"] {
-            border-radius: 2px;
-            border: 1px solid black;
-            height: 22px;
-            padding-left: 3px;
-            background-color: #F8FBFB;
-        }
-
-        input[type="search"]:focus {
-            outline: none;
-            box-shadow: inset 0 0 3px 0px #12163E;
-        }
-
-        button {
-            background: white;
-            border: 1px solid #666;
-            border-radius: 10px;
-        }
-
-        .message-sending button {
-            position: relative;
-            top: 14px;
-            width: 90px;
-            height: 25px;
-            background-color: #F8FBFB;
-        }
-
-        button:hover {
-            cursor: pointer;
-            background: #E7E7E7;
-        }
-
-        button:focus {
-            outline: none;
-        }
-
-        button:active {
-            box-shadow: inset 0 0 2px 0;
-        }
-
-        img[data-img="status"] {
-            width: 10px !important;
-            margin-left: 5px !important;
-        }
-
-        .now-online {
-            margin-left: 15px;
-            cursor: default;
-        }
-
-        .now-online:hover {
-            color: #E2E5E7 !important;
-        }
-
-        .shadow {
-            width: 5px;
-            height: 745px;
-            background-color: #41456D;
-            box-shadow: inset -3px 0px 3px 0px #12163E;
-        }
-
-        .up-shadow {
-            width: 5px;
-            height: 325px;
-            background-color: #2E325A;
-            box-shadow: inset -3px 0px 3px 0px #12163E;
-        }
-    </style>
+    <link rel="stylesheet" href="sass/forindex.css">
+    <link rel="stylesheet" href="sass/forreg.css">
 </head>
 <body>
-<div id="root"></div>
-<header>
-    <img src="img/logo.svg" alt="logo">
-    <div class="profile">
-        <div class="user">
-            <img src="img/user.svg" alt="user">
-            <span class="heder-text">Мой профиль</span>         <!--or registration-->
-        </div>
-        <div class="hide">
-            <span>Личные сообщения 1</span>
-            <span>Редактировать профиль</span>
-            <hr>
-            <span>Поддержка</span>
-            <span>Выйти</span>
-        </div>
-<!--        <img src="img/google-plus.svg" alt="google-plus">-->
-<!--        <img src="img/instagram.svg" alt="instagram">-->
-<!--        <img src="img/facebook.svg" alt="facebook">-->
-        <div class="time">Время: <time id="time-now">12:00:00</time> (в онлайне: <time id="time-in-online">5 мин)</time></div>
-    </div>
-</header>
-<section>
-    <aside id="friends">
-        <div>
-            <div class="create-group" >
-                Создать группу
+<form id="registr">
+    <div>Пожалуйста, войдите в свой аккаунт или зарегистрируйтесь</div><br>
+    <div>Введите ваше имя:</div>
+    <input id="user" type="text" name="username"><br><br>
+    <div>Введите пароль:</div>
+    <input type="password"><br><br>
+    <button type="button" onclick="checkUser()">Войти</button><br>
+    <button type="button" onclick="registerUser()">Зарегистрироваться</button>
+</form>
+<div id="wrapp">
+    <header>
+        <img src="img/logo.svg" alt="logo">
+        <div class="profile">
+            <div class="user">
+                <span id="userNow" class="heder-text">Мой профиль</span><span class="exit" onclick="exit()"> (выйти)</span>
             </div>
-            <div class="search">
-                <p>
-                    <input type="search" placeholder="Поиск чата">
-                    <button type="submit">Найти</button>
-                </p>
+            <div class="time">Время: <time id="time-now">12:00:00</time> (в онлайне: <time id="time-in-online">5 мин)</time></div>
+        </div>
+    </header>
+    <section>
+        <aside id="friends">
+            <div>
+                <div class="create-group" >
+                    <span>Новых сообщений: &nbsp;<span class="messsages-not-reviewed">3</span></span>
+                </div>
+                <div class="search">
+                    <p>
+                        <input type="search" placeholder="Поиск чата">
+                    </p>
+                </div>
+                <div class="now-online">Сейчас в онлайне: &nbsp;<time id="active-users">2</time><img src="img/online.svg" data-img="status"></div>
             </div>
-            <div class="now-online">Сейчас в онлайне: &nbsp;<time id="active-users">2</time><img src="img/online.svg" data-img="status"></div>
-        </div>
-        <!--<div class="friend">
-            <img src="img/leo.jpg" alt="leo">
-            Ди Каприо <img src="img/online.svg" data-img="status">
-        </div>
-        <div class="friend">
-            <img src="img/statham.jpg" alt="statham">
-            Стэтхэм <img src="img/offline.svg" data-img="status">
-        </div>
-        <div class="friend">
-            <img src="img/clark.jpg" alt="clark">
-            Кларк <img src="img/leave.svg" data-img="status">
-        </div>
-        <div class="friend">
-            <img src="img/pikachu.jpg" alt="pikachu">
-            Пикачу <img src="img/online.svg" data-img="status">
-        </div>-->
+        </aside>
+        <div class="shadow"><div class="up-shadow"></div></div>
+        <div class="main">
+            <div class="display-message">
+                <article class="messages-container">
+                    <div>
+                        <img src="img/leo.jpg" alt="leo">
+                        <div class="message left">
+                            Привет, Тимоха! Как дела?<br>Не хочешь сегодня сходить куда-нибудь?
+                        </div>
+                    </div>
 
-    </aside>
-    <div class="shadow"><div class="up-shadow"></div></div>
-    <div class="main">
-        <div class="display-message">
-            <div class="tabs">
-                <div>
-                    MAIN <img src="img/cancel.svg">
+                    <div class="message right">
+                        Привет)<br>Спасибо, все отлично. Но погулять это вряд ли, мне тут чат надо делать...
+                    </div>
+                </article>
+            </div>
+            <div class="message-sending">
+                <div class="emoji">
+                    <img src="img/emoji/happy.svg" data-img="emoji">
+                    <img src="img/emoji/happy-1.svg" data-img="emoji">
+                    <img src="img/emoji/happy-2.svg" data-img="emoji">
+                    <img src="img/emoji/happy-3.svg" data-img="emoji">
+                    <img src="img/emoji/in-love.svg" data-img="emoji">
+                    <img src="img/emoji/mad.svg" data-img="emoji">
+                    <img src="img/emoji/nerd.svg" data-img="emoji">
+                    <img src="img/emoji/quiet.svg" data-img="emoji">
+                    <img src="img/emoji/sad.svg" data-img="emoji">
+                    <img src="img/emoji/secret.svg" data-img="emoji">
+                    <img src="img/emoji/smart.svg" data-img="emoji">
+                    <img src="img/emoji/smiling.svg" data-img="emoji">
+                    <img src="img/emoji/surprised.svg" data-img="emoji">
+                    <img src="img/emoji/suspicious.svg" data-img="emoji">
+                    <img src="img/emoji/tongue-out-1.svg" data-img="emoji">
+                    <img src="img/emoji/unhappy.svg" data-img="emoji">
                 </div>
                 <div>
-                    chat 2 <img src="img/cancel.svg">
-                </div>
-
-            </div>
-            <article class="messages-container">
-                <div>
-                    <img src="img/leo.jpg" alt="leo">
-                    <div class="message left">
-                        Привет, Тимоха! Как дела?<br>Не хочешь сегодня сходить куда-нибудь?
+                    <textarea id="text" onkeyup="count()"></textarea>
+                    <div class="typing-info">
+                        Всего символов: <span id="allChars">0</span>
+                        <div class="margin-default">Невидемых: <span id="space">0</span></div><br>
+                        Букв: <span id="letters">0</span>
+                        <div>Знаков препинания: <span id="stopChars">0</span></div>
                     </div>
                 </div>
-
-                <div class="message right">
-                    Привет)<br>Спасибо, все отлично. Но погулять это вряд ли, мне тут чат надо делать...
+                <div>
+                    <div class="formatting">
+                        <img src="img/edit%20buttons/bold-text.svg" data-img="edit">
+                        <img src="img/edit%20buttons/italics.svg" data-img="edit">
+                        <img src="img/edit%20buttons/undelined.svg" data-img="edit">
+                    </div>
+                    <button onclick="sendMessage()">Отправить</button>
                 </div>
-            </article>
-        </div>
-        <div class="message-sending">
-            <div class="emoji">
-                <img src="img/emoji/happy.svg" data-img="emoji">
-                <img src="img/emoji/happy-1.svg" data-img="emoji">
-                <img src="img/emoji/happy-2.svg" data-img="emoji">
-                <img src="img/emoji/happy-3.svg" data-img="emoji">
-                <img src="img/emoji/in-love.svg" data-img="emoji">
-                <img src="img/emoji/mad.svg" data-img="emoji">
-                <img src="img/emoji/nerd.svg" data-img="emoji">
-                <img src="img/emoji/quiet.svg" data-img="emoji">
-                <img src="img/emoji/sad.svg" data-img="emoji">
-                <img src="img/emoji/secret.svg" data-img="emoji">
-                <img src="img/emoji/smart.svg" data-img="emoji">
-                <img src="img/emoji/smiling.svg" data-img="emoji">
-                <img src="img/emoji/surprised.svg" data-img="emoji">
-                <img src="img/emoji/suspicious.svg" data-img="emoji">
-                <img src="img/emoji/tongue-out-1.svg" data-img="emoji">
-                <img src="img/emoji/unhappy.svg" data-img="emoji">
-            </div>
-            <div>
-                <textarea id="text" autofocus onkeyup="count()"></textarea>
-                <div class="typing-info">
-                    Всего символов: <span id="allChars">0</span>
-                    <div class="margin-default">Невидемых: <span id="space">0</span></div><br>
-                    Букв: <span id="letters">0</span>
-                    <div>Знаков препинания: <span id="stopChars">0</span></div>
-                </div>
-            </div>
-            <div>
-                <div class="formatting">
-                    <img src="img/edit%20buttons/link.svg" data-img="edit">
-                    <img src="img/edit%20buttons/bold-text.svg" data-img="edit">
-                    <img src="img/edit%20buttons/italics.svg" data-img="edit">
-                    <img src="img/edit%20buttons/undelined.svg" data-img="edit">
-                </div>
-                <button onclick="sendMessage()">Отправить</button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
+<script src="js/forreg.js"></script>
 <script src="js/uploadUsers.js"></script>
 <script src="js/index.js"></script>
 </body>

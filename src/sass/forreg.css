@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+    padding: 0px;
+    margin: 0px;
+    font-family: Montserrat;
+    cursor: default;
+    background: #F2F5F7;
+}
+
+form {
+    width: 40%;
+    margin: 200px auto;
+    background: #41456D;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+
+form :first-child {
+    border-bottom: 1px solid white;
+    padding: 10px;
+}
+
+form div {
+    padding: 5px;
+}
+
+input:focus {
+    box-shadow: inset 0 0 3px 0px #2B2B4D;
+}
+
+input {
+    border-radius: 5px;
+    outline: none;
+    padding: 3px;
+    border: 0px;
+}
+
+button {
+    padding: 5px;
+    border-radius: 5px;
+    background: white;
+    border: 0px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+button:last-child {
+    margin-bottom: 20px;
+}
+
+button:active {
+    outline: none;
+    box-shadow: inset 0 0 3px 0px #2B2B4D;
+}
+
+button:focus {
+    outline: none;
+}

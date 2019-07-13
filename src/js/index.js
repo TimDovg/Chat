@@ -43,11 +43,11 @@ window.onload = function(){
     }
 
 
-//вывод сообщений
+//вывод сообщений   userNow - это вошедший пользователь
 let messages = []; // массив сообщений
 
 var request = new XMLHttpRequest();
-request.open('GET', 'https://studentschat.herokuapp.com/messages', true);
+request.open('GET', 'https://studentschat.herokuapp.com/messages', false);
 
 request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
@@ -104,9 +104,13 @@ function count() {
 
 
 
-// отправка сообщений
+// отправка сообщений   userNow - это вошедший пользователь
 function sendMessage() {
     if (document.getElementById('text').value.length >= 500) return alert('Максимальная длина сообщения 500 символов!');
 
     console.log(messages);
+}
+
+function exit() {
+    window.location.reload();
 }
