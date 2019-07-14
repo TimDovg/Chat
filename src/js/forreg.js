@@ -62,8 +62,8 @@ function checkUser() {
 function registerUser() {
   var user = document.getElementsByTagName("input")[0];
   user = user.value;
+  let allow;
 
-  let allow = true;
   usernames.forEach(
       function (usr) {
         if (usr == user) allow = false;
@@ -86,5 +86,6 @@ function registerUser() {
 
   request1.send(JSON.stringify({username: user}));
 
+  alert('Вы успешно зарегистрированы!');
   window.location.reload();
 }

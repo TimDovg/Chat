@@ -29,14 +29,16 @@ window.onload = function(){
         document.getElementById('active-users').innerHTML = active;
 
 // вывод пользователей
+// users = [{} {} {}]  прям все, что на бэкэ
     let status = '';
     let img = "img/noname.jpg";
+
     for (let i = 0; i < users.length; i++) {
         if (users[i].status === "active") status = "img/online.svg";
         if (users[i].status === "leave") status = "img/leave.svg";
         if (users[i].status === "inactive") status = "img/offline.svg";
 
-        document.getElementById('friends').innerHTML += '<div class="friend">\n' +
+            document.getElementById('friends').innerHTML += '<div class="friend">\n' +
             '            <img src='+img+' alt='+img+'>\n' + users[i].username +
             '             <img src='+status+' data-img="status">\n' +
             '        </div>';
@@ -113,4 +115,77 @@ function sendMessage() {
 
 function exit() {
     window.location.reload();
+}
+
+// вывод пользователей при поиске
+// let usernames = []; // only names
+function search() {
+    let friendsSer = document.getElementsByClassName('friend-searched'); // очистка предыдущего поиска
+    while (friendsSer.length) {
+        friendsSer[0].parentNode.removeChild(friendsSer[0]);
+    }
+
+    let str = document.getElementById('search').value;
+
+    let strConstr = new RegExp (str, 'gi');
+    if (str) {
+        let friends = document.getElementsByClassName('friend');
+        for (let i = 0; i < friends.length; i++) {
+            friends[i].style.display = "none";
+        }
+
+        let namesSerched = [];
+        for (let i = 0; i < usernames.length; i++) {
+            if (strConstr.test(usernames[i])) namesSerched.push(usernames[i]);
+        }
+
+        let status = '';
+        let img = "img/noname.jpg";
+
+        for (let i = 0; i < namesSerched.length; i++) {
+            for (let j = 0; j < users.length; j++) {
+                if (users[j].username == namesSerched[i]) {
+                    if (users[j].status === "active") status = "img/online.svg";
+                    if (users[j].status === "leave") status = "img/leave.svg";
+                    if (users[j].status === "inactive") status = "img/offline.svg";
+
+                    document.getElementById('friends').innerHTML += '<div class="friend-searched">\n' +
+                        '            <img src='+img+' alt='+img+'>\n' + users[j].username +
+                        '             <img src='+status+' data-img="status">\n' +
+                        '        </div>';
+                }
+            }
+        }
+
+        document.getElementById('search').value = str;
+        document.getElementById('search').focus();
+    }
+    else {
+        let friends = document.getElementsByClassName('friend');
+        for (let i = 0; i < friends.length; i++) {
+            friends[i].style.display = "flex";
+        }
+
+        let friendsSer = document.getElementsByClassName('friend-searched');
+        while (friendsSer.length) {
+            friendsSer[0].parentNode.removeChild(friendsSer[0]);
+        }
+
+    }
+}
+
+
+// если нажал крестик на input search
+function onSearch(input) {
+    if(input.value == "") {
+        let friends = document.getElementsByClassName('friend');
+        for (let i = 0; i < friends.length; i++) {
+            friends[i].style.display = "flex";
+        }
+
+        let friendsSer = document.getElementsByClassName('friend-searched');
+        while (friendsSer.length) {
+            friendsSer[0].parentNode.removeChild(friendsSer[0]);
+        }
+    }
 }

@@ -38,13 +38,12 @@
                 </div>
                 <div class="search">
                     <p>
-                        <input type="search" placeholder="Поиск чата">
+                        <input id="search" onsearch="onSearch(this)" onkeyup="search()" type="search" placeholder="Поиск чата">
                     </p>
                 </div>
                 <div class="now-online">Сейчас в онлайне: &nbsp;<time id="active-users">2</time><img src="img/online.svg" data-img="status"></div>
             </div>
         </aside>
-        <div class="shadow"><div class="up-shadow"></div></div>
         <div class="main">
             <div class="display-message">
                 <article class="messages-container">

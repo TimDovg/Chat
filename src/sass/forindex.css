@@ -7,6 +7,7 @@ body {
     background-color: #F2F5F7;
     color: #E2E5E7;
     cursor: default;
+    min-width: 1400px;
 }
 
 .heder-text {
@@ -84,6 +85,7 @@ aside {
     background: #BBBEC0;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    box-shadow: -5px 5px 5px 0px #020520;
 }
 
 .message-sending {
@@ -94,6 +96,7 @@ aside {
     display: flex;
     justify-content: center;
     padding-top: 10px;
+    box-shadow: 0px 12px 0px 0 #F2F5F7;
 }
 
 .message-sending div:nth-child(2):not(.margin-default) {
@@ -110,7 +113,18 @@ aside div {
     cursor: pointer;
     min-height: 50px;
 }
+
 .friend:nth-child(2) {
+    border-top: 1px solid white;
+}
+
+.friend-searched {
+    border-bottom: 1px solid white;
+    cursor: pointer;
+    min-height: 50px;
+}
+
+.friend + .friend-searched {
     border-top: 1px solid white;
 }
 
@@ -332,11 +346,4 @@ img[data-img="status"] {
 
 .now-online:hover {
     color: #E2E5E7 !important;
-}
-
-.shadow {
-    width: 5px;
-    height: 745px;
-    background-color: #41456D;
-    box-shadow: inset -3px 0px 3px 0px #12163E;
 }
