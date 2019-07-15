@@ -62,7 +62,7 @@ function checkUser() {
 function registerUser() {
   var user = document.getElementsByTagName("input")[0];
   user = user.value;
-  let allow;
+  let allow = true;
 
   usernames.forEach(
       function (usr) {
