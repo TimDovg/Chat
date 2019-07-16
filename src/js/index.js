@@ -1,39 +1,10 @@
-document.getElementById('wrapp').style.display = "none";
+document.getElementById('wrap').style.display = "none";
 
-// аутентификация
 let usernames = []; // only names
 let userNow = ''; // пользователь, который вошел
 let userNowId = ''; // его Id
 let users = []; // объект с пользователями (users = [{} {} {}]  прям все, что на бэкэ)
-
-
-var request = new XMLHttpRequest();
-request.open('GET', 'https://studentschat.herokuapp.com/users', false);
-
-request.onload = function() {
-    if (request.status >= 200 && request.status < 400) {
-        // Обработчик успещного ответа
-        var response = request.responseText;
-        userList = Response;
-
-        let users = JSON.parse(response).map(
-            function (obj) {
-                return obj.username;
-            }
-        )
-
-        for (let i = 0; i < users.length; i++) {
-            usernames.push(users[i]);
-        }
-
-    } else {
-        // Обработчик ответа в случае ошибки
-    }
-};
-request.onerror = function() {
-    // Обработчик ответа в случае неудачного соеденения
-};
-request.send();
+let active = 0;
 
 
 
@@ -58,7 +29,7 @@ function checkUser() {
         userNow = user;
         document.getElementById('userNow').innerHTML = 'Привет, ' + userNow + '!';
         document.getElementById('registr').style.display = "none";
-        document.getElementById('wrapp').style.display = "block";
+        document.getElementById('wrap').style.display = "block";
     }
     else {
         alert('Пользователь не найден! \n' +
@@ -119,17 +90,6 @@ window.onload = function(){
         window.setTimeout(arguments.callee, 60000);
     })();
 };
-
-
-
-// подсчет активных пользователей
-        let active = 0;
-
-        for (let i = 0; i < users.length; i++) {
-            if (users[i].status === "active") active++;
-        }
-
-        document.getElementById('active-users').innerHTML = active;
 
 
 
@@ -238,17 +198,24 @@ function search() {
             friends[i].style.display = "none";
         }
 
-        let namesSerched = [];
+        let namesSearched = [];
         for (let i = 0; i < usernames.length; i++) {
-            if (strConstr.test(usernames[i])) namesSerched.push(usernames[i]);
+            if (strConstr.test(usernames[i])) {             // БАГ С ПРОВЕРКОЙ - РАБОТАЕТ ЧЕРЕЗ РАЗ
+                namesSearched.push(usernames[i]);
+                continue;
+            }
+            if (strConstr.test(usernames[i])) {
+                namesSearched.push(usernames[i]);
+                continue;
+            }
         }
 
         let status = '';
         let img = "img/noname.jpg";
 
-        for (let i = 0; i < namesSerched.length; i++) {
+        for (let i = 0; i < namesSearched.length; i++) {
             for (let j = 0; j < users.length; j++) {
-                if (users[j].username == namesSerched[i]) {
+                if (users[j].username == namesSearched[i]) {
                     if (users[j].status === "active") status = "img/online.svg";
                     if (users[j].status === "leave") status = "img/leave.svg";
                     if (users[j].status === "inactive") status = "img/offline.svg";
@@ -297,6 +264,7 @@ function onSearch(input) {
 
 
 function displayUsers() {
+    if (document.getElementById('search').value != '') return;
     users = [];
     var request = new XMLHttpRequest();
     request.open('GET', 'https://studentschat.herokuapp.com/users', false);
@@ -329,7 +297,22 @@ function displayUsers() {
     };
     request.send();
 
-    // стрираем предыдущие
+    // вспомогательный массив
+    usernames = [];
+    for (let i = 0; i < users.length; i++) {
+        usernames.push(users[i].username);
+    }
+
+    // подсчет активных пользователей
+    active = 0;
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].status === "active") active++;
+    }
+
+    document.getElementById('active-users').innerHTML = active;
+
+
+    // стираем
     let friends = document.getElementsByClassName('friend');
     while (friends.length) {
         friends[0].parentNode.removeChild(friends[0]);
@@ -349,4 +332,12 @@ function displayUsers() {
             '             <img src=' + status + ' data-img="status">\n' +
             '        </div>';
     }
+}
+
+function cancelOver() {
+    document.getElementById('cancel').src = "img/cancel-over.svg";
+}
+
+function cancelOut() {
+    document.getElementById('cancel').src = "img/cancel.svg";
 }

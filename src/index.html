@@ -7,24 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="title-icon.ico" type="image/x-icon">
     <title>ChatFast</title>
-    <link rel="stylesheet" href="sass/forindex.css">
+    <link rel="stylesheet" href="sass/style.css">
 </head>
 <body>
 <form id="registr">
     <div>Пожалуйста, войдите в свой аккаунт или зарегистрируйтесь</div><br>
     <div>Введите ваше имя:</div>
     <input id="user" type="text" name="username"><br><br>
-    <div>Введите пароль:</div>
-    <input type="password"><br><br>
+    <!--<div>Введите пароль:</div>
+    <input type="password">
+    <br><br>-->
     <button type="button" onclick="checkUser()">Войти</button><br>
     <button type="button" onclick="registerUser()">Зарегистрироваться</button>
 </form>
-<div id="wrapp">
+<div id="wrap">
     <header>
         <img src="img/logo.svg" alt="logo">
         <div class="profile">
             <div class="user">
-                <span id="userNow" class="heder-text">Мой профиль</span><span class="exit" onclick="exit()"> (выйти)</span>
+                <span id="userNow">Мой профиль</span><span class="exit" onclick="exit()"> (выйти)</span>
             </div>
             <div class="time">Время: <time id="time-now">12:00:00</time> (в онлайне: <time id="time-in-online">5 мин)</time></div>
         </div>
@@ -32,7 +33,7 @@
     <section>
         <aside id="friends">
             <div>
-                <div class="create-group" >
+                <div class="all-messages" >
                     <span>Всего сообщений: &nbsp;<span id="all-messages">3</span></span>
                 </div>
                 <div class="search">
@@ -45,6 +46,10 @@
         </aside>
         <div class="main">
             <div class="display-message">
+                <div class="tabs">
+                    <div>MAIN</div>
+                    <!--<div>chat 2 <img id="cancel" src="img/cancel.svg" onmouseout="cancelOut()" onmouseover="cancelOver()"></div>-->
+                </div>
                 <article class="messages-container">
                     <div>
                         <img src="img/leo.jpg" alt="leo">
