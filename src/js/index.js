@@ -5,7 +5,7 @@ let userNow = ''; // пользователь, который вошел
 let userNowId = ''; // его Id
 let users = []; // объект с пользователями (users = [{} {} {}]  прям все, что на бэкэ)
 let active = 0;
-
+let isAllSpaces = false;
 
 
 function checkUser() {
@@ -165,6 +165,8 @@ function count() {
     document.getElementById('allChars').innerHTML = allChars;
     document.getElementById('stopChars').innerHTML = stopChars;
     document.getElementById('letters').innerHTML = letters;
+
+    if (allChars == space) isAllSpaces = true;
 }
 
 
@@ -173,6 +175,7 @@ function count() {
 function sendMessage() {
     if (document.getElementById('text').value.length >= 500) return alert('Максимальная длина сообщения 500 символов!');
     if (document.getElementById('text').value.length == 0) return alert('Введите сообщение!');
+    if (isAllSpaces) alert('Вы ввели только пробелы!');
 
     console.log(messages);
 }
@@ -335,9 +338,9 @@ function displayUsers() {
 }
 
 function cancelOver() {
-    document.getElementById('cancel').src = "img/cancel-over.svg";
+    event.target.src = "img/cancel-over.svg";
 }
 
 function cancelOut() {
-    document.getElementById('cancel').src = "img/cancel.svg";
+    event.target.src = "img/cancel.svg";
 }
