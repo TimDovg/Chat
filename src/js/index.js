@@ -79,6 +79,7 @@ function registerUser() {
         }
     );
 
+    if (user == '') return alert('Введена пустая строка!');
     if (!allow) return alert('Пользователь с таким именем уже сущуствует!');
 
     var request1 = new XMLHttpRequest();

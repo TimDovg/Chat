@@ -347,3 +347,50 @@ img[data-img="status"] {
 .now-online:hover {
     color: #E2E5E7 !important;
 }
+
+
+
+/*for registration*/
+form {
+    width: 40%;
+    margin: 200px auto;
+    background: #41456D;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 20px 0 #12163E;
+}
+
+form :first-child {
+    border-bottom: 1px solid white;
+    padding: 10px;
+}
+
+form div {
+    padding: 5px;
+}
+
+input:focus {
+    box-shadow: inset 0 0 3px 0px #2B2B4D;
+}
+
+input {
+    border-radius: 5px;
+    outline: none;
+    padding: 3px;
+    border: 0px;
+}
+
+button[onclick="registerUser()"], button[onclick="checkUser()"] {
+    padding: 5px;
+    border-radius: 5px;
+    background: white;
+    border: 0px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+button[onclick="registerUser()"] {
+    margin-bottom: 20px;
+}
