@@ -343,6 +343,7 @@ function bold() {
     document.getElementById('text').focus();
     document.getElementById('text').setSelectionRange(document.getElementById('text').value.length - 4,
         document.getElementById('text').value.length - 4);
+    count();
 }
 
 function italic() {
@@ -350,6 +351,7 @@ function italic() {
     document.getElementById('text').focus();
     document.getElementById('text').setSelectionRange(document.getElementById('text').value.length - 4,
         document.getElementById('text').value.length - 4);
+    count();
 }
 
 function underline() {
@@ -357,12 +359,14 @@ function underline() {
     document.getElementById('text').focus();
     document.getElementById('text').setSelectionRange(document.getElementById('text').value.length - 4,
         document.getElementById('text').value.length - 4);
+    count();
 }
 
 function emoji() {
     let emoji = event.target.getAttribute('src').slice(10, -4);
     document.getElementById('text').value += '<' + emoji + '>';
     document.getElementById('text').focus();
+    count();
 }
 
 
