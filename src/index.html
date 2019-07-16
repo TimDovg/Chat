@@ -64,22 +64,22 @@
             </div>
             <div class="message-sending">
                 <div class="emoji">
-                    <img src="img/emoji/happy.svg" data-img="emoji">
-                    <img src="img/emoji/happy-1.svg" data-img="emoji">
-                    <img src="img/emoji/happy-2.svg" data-img="emoji">
-                    <img src="img/emoji/happy-3.svg" data-img="emoji">
-                    <img src="img/emoji/in-love.svg" data-img="emoji">
-                    <img src="img/emoji/mad.svg" data-img="emoji">
-                    <img src="img/emoji/nerd.svg" data-img="emoji">
-                    <img src="img/emoji/quiet.svg" data-img="emoji">
-                    <img src="img/emoji/sad.svg" data-img="emoji">
-                    <img src="img/emoji/secret.svg" data-img="emoji">
-                    <img src="img/emoji/smart.svg" data-img="emoji">
-                    <img src="img/emoji/smiling.svg" data-img="emoji">
-                    <img src="img/emoji/surprised.svg" data-img="emoji">
-                    <img src="img/emoji/suspicious.svg" data-img="emoji">
-                    <img src="img/emoji/tongue-out-1.svg" data-img="emoji">
-                    <img src="img/emoji/unhappy.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/happy.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/happy-1.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/happy-2.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/happy-3.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/in-love.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/mad.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/nerd.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/quiet.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/sad.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/secret.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/smart.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/smiling.svg" data-img="emoji">
+                    <img onclick="emoji()" onclick="emoji()" src="img/emoji/surprised.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/suspicious.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/tongue-out-1.svg" data-img="emoji">
+                    <img onclick="emoji()" src="img/emoji/unhappy.svg" data-img="emoji">
                 </div>
                 <div>
                     <textarea id="text" onkeyup="count()"></textarea>
@@ -92,9 +92,9 @@
                 </div>
                 <div>
                     <div class="formatting">
-                        <img src="img/edit%20buttons/bold-text.svg" data-img="edit">
-                        <img src="img/edit%20buttons/italics.svg" data-img="edit">
-                        <img src="img/edit%20buttons/undelined.svg" data-img="edit">
+                        <img title="Пишите внтури тега" onclick="bold()" src="img/edit%20buttons/bold-text.svg" data-img="edit">
+                        <img title="Пишите внтури тега" onclick="italic()" src="img/edit%20buttons/italics.svg" data-img="edit">
+                        <img title="Пишите внтури тега" onclick="underline()" src="img/edit%20buttons/undelined.svg" data-img="edit">
                     </div>
                     <button onclick="sendMessage()">Отправить</button>
                 </div>

@@ -314,6 +314,58 @@ function cancelOut() {
     event.target.src = "img/cancel.svg";
 }
 
+function newTab() {
+    if (event.target.textContent.trim() == '') return; //баг с пустой строкой, что-то с загрузкой данных
+    if (document.getElementById('tabs').childElementCount >= 8) return alert('Слишком много чатрумов!');
+
+    for (let i = 0; i < tabsOpened.length; i++) {
+       if (tabsOpened[i] == event.target.textContent.trim()) return alert('Этот чат уже открыт!');
+    }
+
+    tabsOpened.push(event.target.textContent.trim());
+
+    document.getElementById('tabs').innerHTML += '<div>' + event.target.textContent.trim() + ' <img src="img/cancel.svg" onclick="cancelTab()" ' +
+        'onmouseout="cancelOut()" onmouseover="cancelOver()"></div>';
+}
+
+function cancelTab() {
+    for (let i = 0; i < tabsOpened.length; i++) {
+        if (event.target.parentNode.textContent.trim() == tabsOpened[i]) tabsOpened.splice(i, 1);
+    }
+    event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+}
+
+//для textarea
+function bold() {
+
+    document.getElementById('text').value += '<b></b>';
+
+    document.getElementById('text').focus();
+    document.getElementById('text').setSelectionRange(document.getElementById('text').value.length - 4,
+        document.getElementById('text').value.length - 4);
+}
+
+function italic() {
+    document.getElementById('text').value += '<i></i>';
+    document.getElementById('text').focus();
+    document.getElementById('text').setSelectionRange(document.getElementById('text').value.length - 4,
+        document.getElementById('text').value.length - 4);
+}
+
+function underline() {
+    document.getElementById('text').value += '<u></u>';
+    document.getElementById('text').focus();
+    document.getElementById('text').setSelectionRange(document.getElementById('text').value.length - 4,
+        document.getElementById('text').value.length - 4);
+}
+
+function emoji() {
+    let emoji = event.target.getAttribute('src').slice(10, -4);
+    document.getElementById('text').value += '<' + emoji + '>';
+    document.getElementById('text').focus();
+}
+
+
 function displayMessages() {
     messages = []; // массив сообщений
 
@@ -357,25 +409,4 @@ function sendMessage() {
     if (isAllSpaces || document.getElementById('text').value == 0) return alert('Введена пустота!\nХоть смайлик отошли :)');
 
     console.log(messages);
-}
-
-function newTab() {
-    if (event.target.textContent.trim() == '') return; //баг с пустой строкой, что-то с загрузкой данных
-    if (document.getElementById('tabs').childElementCount >= 8) return alert('Слишком много чатрумов!');
-
-    for (let i = 0; i < tabsOpened.length; i++) {
-       if (tabsOpened[i] == event.target.textContent.trim()) return alert('Этот чат уже открыт!');
-    }
-
-    tabsOpened.push(event.target.textContent.trim());
-
-    document.getElementById('tabs').innerHTML += '<div>' + event.target.textContent.trim() + ' <img src="img/cancel.svg" onclick="cancelTab()" ' +
-        'onmouseout="cancelOut()" onmouseover="cancelOver()"></div>';
-}
-
-function cancelTab() {
-    for (let i = 0; i < tabsOpened.length; i++) {
-        if (event.target.parentNode.textContent.trim() == tabsOpened[i]) tabsOpened.splice(i, 1);
-    }
-    event.target.parentNode.parentNode.removeChild(event.target.parentNode);
 }

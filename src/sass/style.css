@@ -171,6 +171,7 @@ textarea {
 
 [data-img="edit"] {
     width: 12px;
+
 }
 
 [data-img="edit"]:not(:last-child) {
@@ -342,11 +343,11 @@ img[data-img="status"] {
     height: 25px;
     background-color: #E5EEFF;
     border-top-right-radius: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #2E325A;
 }
 
 .tabs div{
-    background-color: #D5DEEF;
+    background-color: #D9DDFF;
     width: 120px;
     color: black;
     text-align: center;
