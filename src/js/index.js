@@ -194,6 +194,13 @@ function onSearch(input) {
 
 // users = [{} {} {}]  прям все, что на бэкэ
 function displayUsers() {
+    // стрираем предыдущие
+    let friends = document.getElementsByClassName('friend');
+    while (friends.length) {
+        friends[0].parentNode.removeChild(friends[0]);
+    }
+
+
     let status = '';
     let img = "img/noname.jpg";
 
