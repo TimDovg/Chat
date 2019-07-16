@@ -204,6 +204,7 @@ img[src="img/cancel.svg"], img[src="img/cancel-over.svg"] {
     float: right;
     margin-top: 4px;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 .message {

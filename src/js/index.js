@@ -6,11 +6,12 @@ let userNowId = ''; // его Id
 let users = []; // объект с пользователями (users = [{} {} {}]  прям все, что на бэкэ)
 let active = 0;
 let isAllSpaces = false;
-
+let messages = [];
+let tabsOpened = [];
 
 function checkUser() {
     var user = document.getElementsByTagName("input")[0];
-    user = user.value;
+    user = user.value.trim();
 
     let allow = false;
     usernames.forEach(
@@ -41,7 +42,7 @@ function checkUser() {
 
 function registerUser() {
     var user = document.getElementsByTagName("input")[0];
-    user = user.value;
+    user = user.value.trim();
     let allow = true;
 
     usernames.forEach(
@@ -100,38 +101,8 @@ setInterval(displayUsers, 10000);
 
 
 //вывод сообщений   userNow - это вошедший пользователь
-let messages = []; // массив сообщений
-
-var request = new XMLHttpRequest();
-request.open('GET', 'https://studentschat.herokuapp.com/messages', false);
-
-request.onload = function() {
-    if (request.status >= 200 && request.status < 400) {
-        // Обработчик успещного ответа
-        var response = request.responseText;
-        userList = Response;
-
-        let usersGet = JSON.parse(response).map(
-            function (obj) {
-                return obj;
-            }
-        )
-
-        for (let i = 0; i < usersGet.length; i++) {
-            messages.push({});
-            for (key in usersGet[i]) {
-                messages[i][key] = usersGet[i][key];
-            }
-        }
-
-    } else {
-        // Обработчик ответа в случае ошибки
-    }
-};
-request.onerror = function() {
-    // Обработчик ответа в случае неудачного соеденения
-};
-request.send();
+displayMessages();
+setInterval(displayMessages, 1000);
 
 
 
@@ -167,18 +138,10 @@ function count() {
     document.getElementById('letters').innerHTML = letters;
 
     if (allChars == space) isAllSpaces = true;
+    else isAllSpaces = false;
 }
 
 
-
-// отправка сообщений   userNow - это вошедший пользователь
-function sendMessage() {
-    if (document.getElementById('text').value.length >= 500) return alert('Максимальная длина сообщения 500 символов!');
-    if (document.getElementById('text').value.length == 0) return alert('Введите сообщение!');
-    if (isAllSpaces) alert('Вы ввели только пробелы!');
-
-    console.log(messages);
-}
 
 function exit() {
     window.location.reload();
@@ -267,8 +230,10 @@ function onSearch(input) {
 
 
 function displayUsers() {
+    let continueDo = true;
+
     if (document.getElementById('search').value != '') return;
-    users = [];
+
     var request = new XMLHttpRequest();
     request.open('GET', 'https://studentschat.herokuapp.com/users', false);
 
@@ -284,6 +249,9 @@ function displayUsers() {
                 }
             )
 
+            if (usersGet[usersGet.length - 1].username == usernames[usernames.length - 1]) continueDo = false;
+
+            users = [];
             for (let i = 0; i < usersGet.length; i++) {
                 users.push({});
                 for (key in usersGet[i]) {
@@ -300,6 +268,7 @@ function displayUsers() {
     };
     request.send();
 
+    if (!continueDo) return;
     // вспомогательный массив
     usernames = [];
     for (let i = 0; i < users.length; i++) {
@@ -330,7 +299,7 @@ function displayUsers() {
         if (users[i].status === "leave") status = "img/leave.svg";
         if (users[i].status === "inactive") status = "img/offline.svg";
 
-        document.getElementById('friends').innerHTML += '<div class="friend">\n' +
+        document.getElementById('friends').innerHTML += '<div class="friend" onclick="newTab()">\n' +
             '            <img src=' + img + ' alt=' + img + '>\n' + users[i].username +
             '             <img src=' + status + ' data-img="status">\n' +
             '        </div>';
@@ -343,4 +312,70 @@ function cancelOver() {
 
 function cancelOut() {
     event.target.src = "img/cancel.svg";
+}
+
+function displayMessages() {
+    messages = []; // массив сообщений
+
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://studentschat.herokuapp.com/messages', false);
+
+    request.onload = function() {
+        if (request.status >= 200 && request.status < 400) {
+            // Обработчик успещного ответа
+            var response = request.responseText;
+            userList = Response;
+
+            let usersGet = JSON.parse(response).map(
+                function (obj) {
+                    return obj;
+                }
+            )
+
+            for (let i = 0; i < usersGet.length; i++) {
+                messages.push({});
+                for (key in usersGet[i]) {
+                    messages[i][key] = usersGet[i][key];
+                }
+            }
+
+        } else {
+            // Обработчик ответа в случае ошибки
+        }
+    };
+    request.onerror = function() {
+        // Обработчик ответа в случае неудачного соеденения
+    };
+    request.send();
+}
+
+
+
+function sendMessage() {
+    if (document.getElementById('text').value.length >= 500) return alert('Максимальная длина сообщения 500 символов!');
+    if (document.getElementById('text').value.length == 0) return alert('Введите сообщение!');
+    if (isAllSpaces || document.getElementById('text').value == 0) return alert('Введена пустота!\nХоть смайлик отошли :)');
+
+    console.log(messages);
+}
+
+function newTab() {
+    if (event.target.textContent.trim() == '') return; //баг с пустой строкой, что-то с загрузкой данных
+    if (document.getElementById('tabs').childElementCount >= 8) return alert('Слишком много чатрумов!');
+
+    for (let i = 0; i < tabsOpened.length; i++) {
+       if (tabsOpened[i] == event.target.textContent.trim()) return alert('Этот чат уже открыт!');
+    }
+
+    tabsOpened.push(event.target.textContent.trim());
+
+    document.getElementById('tabs').innerHTML += '<div>' + event.target.textContent.trim() + ' <img src="img/cancel.svg" onclick="cancelTab()" ' +
+        'onmouseout="cancelOut()" onmouseover="cancelOver()"></div>';
+}
+
+function cancelTab() {
+    for (let i = 0; i < tabsOpened.length; i++) {
+        if (event.target.parentNode.textContent.trim() == tabsOpened[i]) tabsOpened.splice(i, 1);
+    }
+    event.target.parentNode.parentNode.removeChild(event.target.parentNode);
 }
