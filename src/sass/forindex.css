@@ -276,11 +276,11 @@ aside div:not(:first-child) {
     margin-bottom: -40px;
 }
 
-.create-group:hover:not(.messsages-not-reviewed) {
+.create-group:hover:not(#all-messages) {
     color: white;
 }
 
-.messsages-not-reviewed {
+#all-messages {
     color: #E20000;
 }
 

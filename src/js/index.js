@@ -19,7 +19,6 @@ window.onload = function(){
 
 
 // подсчет активных пользователей
-
         let active = 0;
 
         for (let i = 0; i < users.length; i++) {
@@ -28,21 +27,12 @@ window.onload = function(){
 
         document.getElementById('active-users').innerHTML = active;
 
+
+
 // вывод пользователей
-// users = [{} {} {}]  прям все, что на бэкэ
-    let status = '';
-    let img = "img/noname.jpg";
+displayUsers();
+setTimeout(displayUsers, 10000);
 
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].status === "active") status = "img/online.svg";
-        if (users[i].status === "leave") status = "img/leave.svg";
-        if (users[i].status === "inactive") status = "img/offline.svg";
-
-            document.getElementById('friends').innerHTML += '<div class="friend">\n' +
-            '            <img src='+img+' alt='+img+'>\n' + users[i].username +
-            '             <img src='+status+' data-img="status">\n' +
-            '        </div>';
-    }
 
 
 //вывод сообщений   userNow - это вошедший пользователь
@@ -81,8 +71,17 @@ request.send();
 
 
 
-    // подсчет введенных символов
+// count messages
+let messagesQuantity = 0;
 
+for (let i = 0; i < messages.length; i++) {
+    if (messages.user_id != userNowId) messagesQuantity++;
+}
+document.getElementById('all-messages').innerHTML = messagesQuantity;
+
+
+
+// подсчет введенных символов
 function count() {
     let string = document.getElementById('text').value;
     let space = 0;
@@ -109,6 +108,7 @@ function count() {
 // отправка сообщений   userNow - это вошедший пользователь
 function sendMessage() {
     if (document.getElementById('text').value.length >= 500) return alert('Максимальная длина сообщения 500 символов!');
+    if (document.getElementById('text').value.length == 0) return alert('Введите сообщение!');
 
     console.log(messages);
 }
@@ -187,5 +187,24 @@ function onSearch(input) {
         while (friendsSer.length) {
             friendsSer[0].parentNode.removeChild(friendsSer[0]);
         }
+    }
+}
+
+
+
+// users = [{} {} {}]  прям все, что на бэкэ
+function displayUsers() {
+    let status = '';
+    let img = "img/noname.jpg";
+
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].status === "active") status = "img/online.svg";
+        if (users[i].status === "leave") status = "img/leave.svg";
+        if (users[i].status === "inactive") status = "img/offline.svg";
+
+        document.getElementById('friends').innerHTML += '<div class="friend">\n' +
+            '            <img src=' + img + ' alt=' + img + '>\n' + users[i].username +
+            '             <img src=' + status + ' data-img="status">\n' +
+            '        </div>';
     }
 }

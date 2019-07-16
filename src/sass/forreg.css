@@ -15,6 +15,7 @@ form {
     color: white;
     text-align: center;
     border-radius: 10px;
+    box-shadow: 0 0 20px 0 #12163E;
 }
 
 form :first-child {

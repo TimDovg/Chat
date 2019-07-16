@@ -3,6 +3,7 @@ document.getElementById('wrapp').style.display = "none";
 // аутентификация
 let usernames = []; // only names
 let userNow = ''; // пользователь, который вошел
+let userNowId = ''; // его Id
 
 
   var request = new XMLHttpRequest();
@@ -34,6 +35,7 @@ let userNow = ''; // пользователь, который вошел
   request.send();
 
 
+
 function checkUser() {
   var user = document.getElementsByTagName("input")[0];
   user = user.value;
@@ -46,6 +48,12 @@ function checkUser() {
   );
 
   if (allow) {
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].username == userNow) {
+        userNowId = users[i].user_id;
+        break;
+      }
+    }
     userNow = user;
     document.getElementById('userNow').innerHTML = 'Привет, ' + userNow + '!';
     document.getElementById('registr').style.display = "none";
