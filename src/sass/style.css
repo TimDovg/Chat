@@ -224,6 +224,8 @@ img[src="img/cancel.svg"], img[src="img/cancel-over.svg"] {
     border-bottom-right-radius: 5px;
     margin-left: auto;
     margin-right: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .left {
@@ -239,7 +241,7 @@ img[src="img/cancel.svg"], img[src="img/cancel-over.svg"] {
     flex-direction: column;
 }
 
-.messages-container img {
+.messages-container img:not([data-img="emoji"]) {
     width: 70px;
     border-radius: 50%;
     margin-top: 12px;

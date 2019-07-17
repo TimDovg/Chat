@@ -8,6 +8,7 @@ let active = 0;
 let isAllSpaces = false;
 let messages = [];
 let tabsOpened = [];
+let chatRoomNow = 'MAIN';
 
 function checkUser() {
     var user = document.getElementsByTagName("input")[0];
@@ -371,7 +372,7 @@ function emoji() {
 
 
 function displayMessages() {
-    messages = []; // массив сообщений
+    let continueDo = true;
 
     var request = new XMLHttpRequest();
     request.open('GET', 'https://studentschat.herokuapp.com/messages', false);
@@ -388,6 +389,9 @@ function displayMessages() {
                 }
             )
 
+            if (usersGet.length == messages.length) return continueDo = false;
+
+            messages = [];
             for (let i = 0; i < usersGet.length; i++) {
                 messages.push({});
                 for (key in usersGet[i]) {
@@ -399,6 +403,7 @@ function displayMessages() {
             // Обработчик ответа в случае ошибки
         }
     };
+    if (!continueDo) return;
     request.onerror = function() {
         // Обработчик ответа в случае неудачного соеденения
     };
@@ -412,5 +417,13 @@ function sendMessage() {
     if (document.getElementById('text').value.length == 0) return alert('Введите сообщение!');
     if (isAllSpaces || document.getElementById('text').value == 0) return alert('Введена пустота!\nХоть смайлик отошли :)');
 
-    console.log(messages);
+    let message = document.getElementById('text').value;
+
+    message = message.replace(/<happy>/g, '&nbsp;<img src="img/emoji/happy.svg" data-img="emoji">&nbsp;');
+
+    document.getElementById('messages-container').innerHTML += '<div class="message right">\n' +
+        message +
+        '                    </div>';
+
+    document.getElementById('text').value = '';
 }
