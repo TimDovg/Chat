@@ -103,7 +103,7 @@ setInterval(displayUsers, 10000);
 
 //вывод сообщений   userNow - это вошедший пользователь
 displayMessages();
-setInterval(displayMessages, 1000);
+setInterval(displayMessages, 2000);
 
 // count messages
 countMessages();
@@ -355,7 +355,8 @@ function selectTab() {
 function cancelTab() {
     let allTabs = document.getElementsByClassName('tab');
     event.target.parentNode.parentNode.removeChild(event.target.parentNode);debugger
-    allTabs[allTabs.length - 1].style = 'green';  // БАГ НЕ МОЙ
+    allTabs[allTabs.length - 1].style.background = 'green';  // БАГ НЕ МОЙ
+    document.getElementById('test').style.background = 'green';
 }
 
 //для textarea
@@ -402,6 +403,64 @@ function emoji() {
 }
 
 
+
+function sendMessage() {
+    if (document.getElementById('text').value.length > 500) return alert('Максимальная длина сообщения 500 символов!');
+    if (document.getElementById('text').value.length == 0 || words <= 0 || isAllSpaces
+        || document.getElementById('text').value == 0) return alert('Введите сообщение!');
+
+    let message = document.getElementById('text').value;
+
+    message = message.replace(/<happy>/g, '<img src="img/emoji/happy.svg" data-img="emoji">');
+    message = message.replace(/<happy-1>/g, '<img src="img/emoji/happy-1.svg" data-img="emoji">');
+    message = message.replace(/<happy-2>/g, '<img src="img/emoji/happy-2.svg" data-img="emoji">');
+    message = message.replace(/<happy-3>/g, '<img src="img/emoji/happy-3.svg" data-img="emoji">');
+    message = message.replace(/<in-love>/g, '<img src="img/emoji/in-love.svg" data-img="emoji">');
+    message = message.replace(/<mad>/g, '<img src="img/emoji/mad.svg" data-img="emoji">');
+    message = message.replace(/<nerd>/g, '<img src="img/emoji/nerd.svg" data-img="emoji">');
+    message = message.replace(/<quiet>/g, '<img src="img/emoji/quiet.svg" data-img="emoji">');
+    message = message.replace(/<sad>/g, '<img src="img/emoji/sad.svg" data-img="emoji">');
+    message = message.replace(/<secret>/g, '&<img src="img/emoji/secret.svg" data-img="emoji">');
+    message = message.replace(/<smart>/g, '<img src="img/emoji/smart.svg" data-img="emoji">');
+    message = message.replace(/<smiling>/g, '<img src="img/emoji/smiling.svg" data-img="emoji">');
+    message = message.replace(/<surprised>/g, '<img src="img/emoji/surprised.svg" data-img="emoji">');
+    message = message.replace(/<suspicious>/g, '<img src="img/emoji/suspicious.svg" data-img="emoji">');
+    message = message.replace(/<tongue-out-1>/g, '<img src="img/emoji/tongue-out-1.svg" data-img="emoji">');
+    message = message.replace(/<unhappy>/g, '<img src="img/emoji/unhappy.svg" data-img="emoji">');
+    message = message.replace(/<unhappy>/g, '<img src="img/emoji/unhappy.svg" data-img="emoji">');
+
+    document.getElementById('messages-container').innerHTML += '<div class="message right">' + message +
+        '</div>';
+    words = 0;
+
+    let date = new Date().toISOString();
+    messages.push({"user_id":userNowId,"message":document.getElementById('text').value,"chatroom_id":chatRoomNow,"datetime":date});
+
+    //отправка на сервер
+    var request1 = new XMLHttpRequest();
+    request1.open('POST', 'https://studentschat.herokuapp.com/messages', false);
+
+    request1.onload = function() {
+        // Обработчик ответа в случае удачного соеденения
+    };
+
+    request1.onerror = function() {
+        alert('error')// Обработчик ответа в случае неудачного соеденения
+    };
+    request1.setRequestHeader('Content-Type', 'application/json');
+
+    request1.send(JSON.stringify({
+        datetime: date,
+        message: document.getElementById('text').value,
+        user_id: userNowId
+    }));
+    document.getElementById('text').value = '';
+
+    count();
+}
+
+
+
 function displayMessages() {
     let continueDo = true;
 
@@ -434,66 +493,12 @@ function displayMessages() {
             // Обработчик ответа в случае ошибки
         }
     };
-    if (!continueDo) return;
+
     request.onerror = function() {
         // Обработчик ответа в случае неудачного соеденения
     };
     request.send();
-}
 
-
-
-function sendMessage() {
-    if (document.getElementById('text').value.length > 500) return alert('Максимальная длина сообщения 500 символов!');
-    if (document.getElementById('text').value.length == 0 || words <= 0 || isAllSpaces
-        || document.getElementById('text').value == 0) return alert('Введите сообщение!');
-
-    let message = document.getElementById('text').value;
-
-    message = message.replace(/<happy>/g, '<img src="img/emoji/happy.svg" data-img="emoji">');
-    message = message.replace(/<happy-1>/g, '<img src="img/emoji/happy-1.svg" data-img="emoji">');
-    message = message.replace(/<happy-2>/g, '<img src="img/emoji/happy-2.svg" data-img="emoji">');
-    message = message.replace(/<happy-3>/g, '<img src="img/emoji/happy-3.svg" data-img="emoji">');
-    message = message.replace(/<in-love>/g, '<img src="img/emoji/in-love.svg" data-img="emoji">');
-    message = message.replace(/<mad>/g, '<img src="img/emoji/mad.svg" data-img="emoji">');
-    message = message.replace(/<nerd>/g, '<img src="img/emoji/nerd.svg" data-img="emoji">');
-    message = message.replace(/<quiet>/g, '<img src="img/emoji/quiet.svg" data-img="emoji">');
-    message = message.replace(/<sad>/g, '<img src="img/emoji/sad.svg" data-img="emoji">');
-    message = message.replace(/<secret>/g, '&<img src="img/emoji/secret.svg" data-img="emoji">');
-    message = message.replace(/<smart>/g, '<img src="img/emoji/smart.svg" data-img="emoji">');
-    message = message.replace(/<smiling>/g, '<img src="img/emoji/smiling.svg" data-img="emoji">');
-    message = message.replace(/<surprised>/g, '<img src="img/emoji/surprised.svg" data-img="emoji">');
-    message = message.replace(/<suspicious>/g, '<img src="img/emoji/suspicious.svg" data-img="emoji">');
-    message = message.replace(/<tongue-out-1>/g, '<img src="img/emoji/tongue-out-1.svg" data-img="emoji">');
-    message = message.replace(/<unhappy>/g, '<img src="img/emoji/unhappy.svg" data-img="emoji">');
-    message = message.replace(/<unhappy>/g, '<img src="img/emoji/unhappy.svg" data-img="emoji">');
-
-    document.getElementById('messages-container').innerHTML += '<div class="message right">' + message +
-        '</div>';
-    words = 0;
-
-    let date = new Date().toISOString();
-    messages.push({"user_id":userNowId,"message":document.getElementById('text').value,"chatroom_id":"MAIN","datetime":date});
-
-    //отправка на сервер
-    var request1 = new XMLHttpRequest();
-    request1.open('POST', 'https://studentschat.herokuapp.com/messages', false);
-
-    request1.onload = function() {
-        // Обработчик ответа в случае удачного соеденения
-    };
-
-    request1.onerror = function() {
-        alert('error')// Обработчик ответа в случае неудачного соеденения
-    };
-    request1.setRequestHeader('Content-Type', 'application/json');
-
-    request1.send(JSON.stringify({
-        datetime: date,
-        message: document.getElementById('text').value,
-        user_id: userNowId
-    }));
-    document.getElementById('text').value = '';
-
-    count();
+    if (continueDo == false) return;
+    console.log(messages);
 }
