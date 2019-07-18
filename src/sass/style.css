@@ -8,7 +8,7 @@ body {
     background-color: #F2F5F7;
     color: #E2E5E7;
     cursor: default;
-    min-width: 1400px;
+    min-width: 1515px;
 }
 
 header {
@@ -82,7 +82,6 @@ aside {
     background: #BBBEC0;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    box-shadow: -3px 5px 5px 0px #020520;
 }
 
 .message-sending {
@@ -98,6 +97,10 @@ aside {
 
 .message-sending div:nth-child(2):not(.margin-default) {
     margin-right: 5px;
+}
+
+#friends {
+    overflow-y: auto;
 }
 
 aside div {
@@ -215,44 +218,68 @@ img[src="img/cancel.svg"], img[src="img/cancel-over.svg"] {
     font-size: 0.9em;
     background-color: #F8FBFB;
     padding: 15px;
-    margin-top: 15px;
+    padding-bottom: 5px;
     color: black;
     max-width: 400px;
     text-align: left;
-    white-space: pre-line;
+    word-break: break-all;
 }
 
 .right {
+    max-width: 430px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     margin-left: auto;
     margin-right: 10px;
+    margin-top: 15px;
 }
 
 .left {
+    max-width: 430px;
     margin-right: auto;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    margin-left: 90px;
+    margin-left: 20px;
+    margin-top: 5px;
 }
 
 .messages-container {
     display: flex;
     flex-direction: column;
+    overflow: auto;
+    height: 600px;
 }
 
-.messages-container img:not([data-img="emoji"]) {
-    width: 70px;
+.messages-container::-webkit-scrollbar {
+    width: 3px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    height: 1px;
+    background-color: #2E325A;
     border-radius: 50%;
+}
+
+aside::-webkit-scrollbar {
+    width: 4px;
+}
+
+aside::-webkit-scrollbar-thumb {
+    height: 1px;
+    background-color: #009900;
+    border-radius: 50%;
+}
+
+.name {
+    font-family: Raleway;
+    font-weight: bold;
+    color: #41456D;
+    max-width: 235px;
     margin-top: 12px;
     margin-left: 10px;
     float: left;
-}
-
-.messages-container :first-child {
-    max-width: 435px;
 }
 
 aside div:not(:first-child) img {
@@ -269,9 +296,9 @@ aside div:not(:first-child) {
 }
 
 .all-messages {
+    width: 232px;
     padding: 3px;
     margin-top: 10px;
-    width: 100%;
     color: #E2E5E7;
     text-align: center;
     margin-bottom: -40px;
@@ -371,13 +398,34 @@ img[data-img="status"] {
     color: white;
 }
 
-.blank {
+.down-arrow {
     position: relative;
+    width: 35px;
+    height: 35px;
+    top: -100px;
+    left: 215px;
+    border-radius: 50%;
+    background: rgba(87, 91, 131, 0.3);
     z-index: 2;
-    width: 500px;
-    height: 10px;
-    background: #F2F5F7;
+    text-align: center;
+    cursor: pointer;
 }
+
+[src="img/down-arrow.svg"], [src="img/down-arrow-over.svg"] {
+    opacity: 0.5;
+    position: relative;
+    top: 8px;
+    width: 20px;
+}
+
+.date {
+    position: relative;
+    float: right;
+    font-size: 0.8em;
+    color: #B5B9E1;
+    left: 10px;
+}
+
 
 /*for registration*/
 form {

@@ -50,14 +50,6 @@
                     <div id="test" class="tab" onclick="selectTab()">MAIN</div>
                 </div>
                 <article id="messages-container" class="messages-container">
-                    <div>
-                        <img src="img/leo.jpg" alt="leo">
-                        <div class="message left">Привет, Тимоха! Как дела?<br>Не хочешь сегодня сходить куда-нибудь?
-                        </div>
-                    </div>
-
-                    <div class="message right">Привет)<br>Спасибо, все отлично. Но погулять это вряд ли, мне тут чат надо делать...
-                    </div>
                 </article>
             </div>
             <div class="message-sending">
@@ -96,12 +88,12 @@
                         <img title="Пишите после тега" onclick="lineBreak()" src="img/edit%20buttons/line-break.svg" data-img="edit">
                     </div>
                     <button onclick="sendMessage()">Отправить</button>
+                    <div class="down-arrow" onmouseout="downArrowOut()" onmouseover="downArrowOver()" onclick="scrollBottom()"><img id="down-arrow" src="img/down-arrow.svg"></div>
                 </div>
             </div>
         </div>
     </section>
 </div>
-<div class="blank"></div>
 <script src="js/index.js"></script>
 </body>
 </html>

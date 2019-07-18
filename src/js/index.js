@@ -32,6 +32,10 @@ function checkUser() {
         document.getElementById('userNow').innerHTML = 'Привет, ' + userNow + '!';
         document.getElementById('registr').parentNode.removeChild(document.getElementById('registr'));
         document.getElementById('wrap').style.display = "block";
+
+        //вывод сообщений   userNow - это вошедший пользователь
+        displayMessages();
+        setInterval(displayMessages, 2000);
     }
     else {
         alert('Пользователь не найден! \n' +
@@ -99,11 +103,6 @@ window.onload = function(){
 displayUsers();
 setInterval(displayUsers, 10000);
 
-
-
-//вывод сообщений   userNow - это вошедший пользователь
-displayMessages();
-setInterval(displayMessages, 2000);
 
 // count messages
 countMessages();
@@ -329,7 +328,7 @@ function newTab() {
     document.getElementById('tabs').childNodes;
 
     if (event.target.textContent.trim() == '') return; //баг с пустой строкой, что-то с загрузкой данных
-    if (document.getElementById('tabs').childElementCount >= 8) return alert('Слишком много чатрумов!');
+    if (document.getElementById('tabs').childElementCount >= 7) return alert('Слишком много чатрумов!');
 
     for (let i = 0; i < tabsNames.length; i++) {
        if (tabsNames[i] == event.target.textContent.trim()) return alert('Этот чат уже открыт!');
@@ -353,10 +352,15 @@ function selectTab() {
 }
 
 function cancelTab() {
+    event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+    setTimeout(cancelEnd, 10);
+}
+
+// БАГ НЕ МОЙ
+function cancelEnd() {
     let allTabs = document.getElementsByClassName('tab');
-    event.target.parentNode.parentNode.removeChild(event.target.parentNode);debugger
-    allTabs[allTabs.length - 1].style.background = 'green';  // БАГ НЕ МОЙ
-    document.getElementById('test').style.background = 'green';
+    allTabs[allTabs.length - 1].style.background = '#B5B9E1';
+    chatRoomNow = allTabs[allTabs.length - 1].textContent.trim();
 }
 
 //для textarea
@@ -410,6 +414,8 @@ function sendMessage() {
         || document.getElementById('text').value == 0) return alert('Введите сообщение!');
 
     let message = document.getElementById('text').value;
+    let messageDate = new Date();
+    messageDate = ('0' + messageDate.getHours()).slice(-2) + ':' + ('0' + messageDate.getMinutes()).slice(-2);
 
     message = message.replace(/<happy>/g, '<img src="img/emoji/happy.svg" data-img="emoji">');
     message = message.replace(/<happy-1>/g, '<img src="img/emoji/happy-1.svg" data-img="emoji">');
@@ -420,7 +426,7 @@ function sendMessage() {
     message = message.replace(/<nerd>/g, '<img src="img/emoji/nerd.svg" data-img="emoji">');
     message = message.replace(/<quiet>/g, '<img src="img/emoji/quiet.svg" data-img="emoji">');
     message = message.replace(/<sad>/g, '<img src="img/emoji/sad.svg" data-img="emoji">');
-    message = message.replace(/<secret>/g, '&<img src="img/emoji/secret.svg" data-img="emoji">');
+    message = message.replace(/<secret>/g, '<img src="img/emoji/secret.svg" data-img="emoji">');
     message = message.replace(/<smart>/g, '<img src="img/emoji/smart.svg" data-img="emoji">');
     message = message.replace(/<smiling>/g, '<img src="img/emoji/smiling.svg" data-img="emoji">');
     message = message.replace(/<surprised>/g, '<img src="img/emoji/surprised.svg" data-img="emoji">');
@@ -430,8 +436,9 @@ function sendMessage() {
     message = message.replace(/<unhappy>/g, '<img src="img/emoji/unhappy.svg" data-img="emoji">');
 
     document.getElementById('messages-container').innerHTML += '<div class="message right">' + message +
-        '</div>';
+        '<br><span class="date">' + messageDate + '</span></div>';
     words = 0;
+    document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
 
     let date = new Date().toISOString();
     messages.push({"user_id":userNowId,"message":document.getElementById('text').value,"chatroom_id":chatRoomNow,"datetime":date});
@@ -500,5 +507,61 @@ function displayMessages() {
     request.send();
 
     if (continueDo == false) return;
-    console.log(messages);
+    document.getElementById('messages-container').innerHTML = "";
+    for (let i = 0; i < messages.length; i++) {
+        let date = Date.parse(messages[i].datetime);
+        date = new Date(date);
+        date = ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
+        let message = messages[i].message;
+        message = message.replace(/<happy>/g, '<img src="img/emoji/happy.svg" data-img="emoji">');
+        message = message.replace(/<happy-1>/g, '<img src="img/emoji/happy-1.svg" data-img="emoji">');
+        message = message.replace(/<happy-2>/g, '<img src="img/emoji/happy-2.svg" data-img="emoji">');
+        message = message.replace(/<happy-3>/g, '<img src="img/emoji/happy-3.svg" data-img="emoji">');
+        message = message.replace(/<in-love>/g, '<img src="img/emoji/in-love.svg" data-img="emoji">');
+        message = message.replace(/<mad>/g, '<img src="img/emoji/mad.svg" data-img="emoji">');
+        message = message.replace(/<nerd>/g, '<img src="img/emoji/nerd.svg" data-img="emoji">');
+        message = message.replace(/<quiet>/g, '<img src="img/emoji/quiet.svg" data-img="emoji">');
+        message = message.replace(/<sad>/g, '<img src="img/emoji/sad.svg" data-img="emoji">');
+        message = message.replace(/<secret>/g, '&<img src="img/emoji/secret.svg" data-img="emoji">');
+        message = message.replace(/<smart>/g, '<img src="img/emoji/smart.svg" data-img="emoji">');
+        message = message.replace(/<smiling>/g, '<img src="img/emoji/smiling.svg" data-img="emoji">');
+        message = message.replace(/<surprised>/g, '<img src="img/emoji/surprised.svg" data-img="emoji">');
+        message = message.replace(/<suspicious>/g, '<img src="img/emoji/suspicious.svg" data-img="emoji">');
+        message = message.replace(/<tongue-out-1>/g, '<img src="img/emoji/tongue-out-1.svg" data-img="emoji">');
+        message = message.replace(/<unhappy>/g, '<img src="img/emoji/unhappy.svg" data-img="emoji">');
+        message = message.replace(/<unhappy>/g, '<img src="img/emoji/unhappy.svg" data-img="emoji">');
+
+        if (messages[i].user_id == userNowId) {
+            document.getElementById('messages-container').innerHTML += '<div class="message right">' + message +
+                '<br><span class="date">' + date + '</span></div>';
+        }
+        else if (i != 0 && messages[i].user_id == messages[i - 1].user_id) {
+            document.getElementById('messages-container').innerHTML += '<div class="message left">' + message +
+                '<br><span class="date">' + date + '</span></div>';
+        }
+
+        else {
+            document.getElementById('messages-container').innerHTML += '<div class="name">' + getName(messages[i].user_id) + '</div>' + '<div class="message left">' + message +
+                '<br><span class="date">' + date + '</span></div>';
+        }
+    }
+    setTimeout(scrollBottom, 10);
+}
+
+function scrollBottom() {
+    document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
+}
+
+function getName(userId) {
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].user_id == userId) return users[i].username;
+    }
+}
+
+function downArrowOver() {
+    document.getElementById('down-arrow').src = 'img/down-arrow-over.svg';
+}
+
+function downArrowOut() {
+    document.getElementById('down-arrow').src = 'img/down-arrow.svg';
 }
