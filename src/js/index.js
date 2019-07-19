@@ -119,6 +119,10 @@ function countMessages() {
 // подсчет введенных символов
 function count() {
     if (event.keyCode == 8) words -= 1;
+    if (event.keyCode == 13) {
+        document.getElementById('text').value = document.getElementById('text').value.slice(0, -1);
+        sendMessage();
+    }
     else words++;
 
     let string = document.getElementById('text').value;
@@ -461,9 +465,12 @@ function sendMessage() {
         message: document.getElementById('text').value,
         user_id: userNowId
     }));
-    document.getElementById('text').value = '';
 
-    count();
+    document.getElementById('text').value = '';
+    document.getElementById('space').innerHTML = 0;
+    document.getElementById('allChars').innerHTML = 0;
+    document.getElementById('stopChars').innerHTML = 0;
+    document.getElementById('letters').innerHTML = 0;
 }
 
 
