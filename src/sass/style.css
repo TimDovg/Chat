@@ -429,6 +429,8 @@ img[data-img="status"] {
     font-size: 0.8em;
     color: #B5B9E1;
     left: 10px;
+    font-weight: normal;
+    font-style: normal;
 }
 
 .days-ago {

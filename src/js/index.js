@@ -530,7 +530,7 @@ function displayMessages() {
         message = message.replace(/<nerd>/g, '<img src="img/emoji/nerd.svg" data-img="emoji">');
         message = message.replace(/<quiet>/g, '<img src="img/emoji/quiet.svg" data-img="emoji">');
         message = message.replace(/<sad>/g, '<img src="img/emoji/sad.svg" data-img="emoji">');
-        message = message.replace(/<secret>/g, '&<img src="img/emoji/secret.svg" data-img="emoji">');
+        message = message.replace(/<secret>/g, '<img src="img/emoji/secret.svg" data-img="emoji">');
         message = message.replace(/<smart>/g, '<img src="img/emoji/smart.svg" data-img="emoji">');
         message = message.replace(/<smiling>/g, '<img src="img/emoji/smiling.svg" data-img="emoji">');
         message = message.replace(/<surprised>/g, '<img src="img/emoji/surprised.svg" data-img="emoji">');
