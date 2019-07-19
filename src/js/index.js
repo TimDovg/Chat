@@ -193,7 +193,7 @@ function search() {
                     if (users[j].status === "leave") status = "img/leave.svg";
                     if (users[j].status === "inactive") status = "img/offline.svg";
 
-                    document.getElementById('friends').innerHTML += '<div class="friend-searched">\n' +
+                    document.getElementById('friends').innerHTML += '<div onclick="newTab()" class="friend-searched">\n' +
                         '            <img src='+img+' alt='+img+'>\n' + users[j].username +
                         '             <img src='+status+' data-img="status">\n' +
                         '        </div>';
