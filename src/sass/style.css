@@ -444,12 +444,11 @@ img[data-img="status"] {
 }
 
 hr {
-    border: 1px solid #E20000;
-    background: #E20000;
-}
-
-hr:first-child {
     border: 0.3px solid #E20000;
+    color: #E20000;
+    height: 1px;
+    background: #E20000;
+    border-radius: 42%;
 }
 
 
