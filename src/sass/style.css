@@ -443,6 +443,14 @@ img[data-img="status"] {
     color: #E20000;
 }
 
+hr {
+    border: 1px solid #E20000;
+    background: #E20000;
+}
+
+hr:first-child {
+    border: 0.3px solid #E20000;
+}
 
 
 /*for registration*/
