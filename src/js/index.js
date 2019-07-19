@@ -477,6 +477,7 @@ function sendMessage() {
 
 function displayMessages() {
     let continueDo = true;
+    let daysAgo = 0;
 
     var request = new XMLHttpRequest();
     request.open('GET', 'https://studentschat.herokuapp.com/messages', false);
@@ -538,21 +539,57 @@ function displayMessages() {
         message = message.replace(/<unhappy>/g, '<img src="img/emoji/unhappy.svg" data-img="emoji">');
         message = message.replace(/<unhappy>/g, '<img src="img/emoji/unhappy.svg" data-img="emoji">');
 
-        if (messages[i].user_id == userNowId) {
-            document.getElementById('messages-container').innerHTML += '<div class="message right">' + message +
-                '<br><span class="date">' + date + '</span></div>';
-        }
-        else if (i != 0 && messages[i].user_id == messages[i - 1].user_id) {
-            document.getElementById('messages-container').innerHTML += '<div class="message left">' + message +
-                '<br><span class="date">' + date + '</span></div>';
-        }
+        daysAgo = (Date.now() - Date.parse(messages[i].datetime)) / 8.64e7 ^ 0;
+        if (daysAgo == 0) daysAgo = 'Сегодня';
+        else if (daysAgo == 1) daysAgo = 'Вчера';
+        else daysAgo = daysAgo + ' дней назад';
 
+        // если дата повторяется
+        let dateLast = [];
+        if (document.getElementsByClassName('days-ago').length != 0) dateLast = document.getElementsByClassName('days-ago')[document.getElementsByClassName('days-ago').length - 1].textContent.trim();
+        if (dateLast == daysAgo) {
+            // если сообщение от userNow
+            if (messages[i].user_id == userNowId) {
+                document.getElementById('messages-container').innerHTML +='</div>' +
+                    '<div class="message right">' + message +
+                    '<br><span class="date">' + date + '</span></div>';
+            }
+            // если сообщение от того же юзера
+            else if (i != 0 && messages[i].user_id == messages[i - 1].user_id) {
+                document.getElementById('messages-container').innerHTML +='</div>' +
+                    '<div class="message left">' + message +
+                    '<br><span class="date">' + date + '</span></div>';
+            }
+
+            else {
+                document.getElementById('messages-container').innerHTML +='</div>' +
+                    '<div class="name">' + getName(messages[i].user_id) + '</div>' + '<div class="message left">' + message +
+                    '<br><span class="date">' + date + '</span></div>';
+            }
+        }
         else {
-            document.getElementById('messages-container').innerHTML += '<div class="name">' + getName(messages[i].user_id) + '</div>' + '<div class="message left">' + message +
-                '<br><span class="date">' + date + '</span></div>';
+            // дата не повторяется
+            // если сообщение от userNow
+            if (messages[i].user_id == userNowId) {
+                document.getElementById('messages-container').innerHTML += '<div class="days-ago"><hr>' + daysAgo + '</div>' +
+                    '<div class="message right">' + message +
+                    '<br><span class="date">' + date + '</span></div>';
+            }
+            // если сообщение от того же юзера
+            else if (i != 0 && messages[i].user_id == messages[i - 1].user_id) {
+                document.getElementById('messages-container').innerHTML += '<div class="days-ago"><hr>' + daysAgo + '</div>' +
+                    '<div class="message left">' + message +
+                    '<br><span class="date">' + date + '</span></div>';
+            }
+
+            else {
+                document.getElementById('messages-container').innerHTML += '<div class="days-ago"><hr>' + daysAgo + '</div>' +
+                    '<div class="name">' + getName(messages[i].user_id) + '</div>' + '<div class="message left">' + message +
+                    '<br><span class="date">' + date + '</span></div>';
+            }
         }
     }
-    setTimeout(scrollBottom, 10);
+    setTimeout(scrollBottom, 10); // БАГ НЕ МОЙ
 }
 
 function scrollBottom() {

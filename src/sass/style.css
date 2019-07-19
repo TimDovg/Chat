@@ -304,6 +304,11 @@ aside div:not(:first-child) {
     margin-bottom: -40px;
 }
 
+
+#all-messages {
+    color: #E20000;
+}
+
 aside div:first-child:not(.all-messages) {
     display: flex;
     flex-direction: column;
@@ -425,6 +430,17 @@ img[data-img="status"] {
     color: #B5B9E1;
     left: 10px;
 }
+
+.days-ago {
+    width: 250px;
+    text-align: center;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-bottom: 5px;
+    margin-left: auto;
+    color: #E20000;
+}
+
 
 
 /*for registration*/
