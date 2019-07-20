@@ -322,14 +322,13 @@ function cancelOut() {
 }
 
 function newTab() {
-    let tabs = document.getElementsByClassName('tab');;
+    let tabs = document.getElementsByClassName('tab');
     let tabsNames = [];
 
     for (let i = 0; i < tabs.length; i++) {
         tabsNames.push(tabs[i].textContent.trim());
     }
 
-    document.getElementById('tabs').childNodes;
 
     if (event.target.textContent.trim() == '') return; //баг с пустой строкой, что-то с загрузкой данных
     if (document.getElementById('tabs').childElementCount >= 7) return alert('Слишком много чатрумов!');
@@ -338,7 +337,10 @@ function newTab() {
        if (tabsNames[i] == event.target.textContent.trim()) return alert('Этот чат уже открыт!');
     }
 
-    document.getElementById('tabs').innerHTML += '<div class="tab" onclick="selectTab()">' + event.target.textContent.trim() + ' <img src="img/cancel.svg" onclick="cancelTab()" ' +
+    if (event.target.textContent.trim() == userNow) return alert('Это твой логин!');
+
+    document.getElementById('tabs').innerHTML += '<div class="tab" onclick="selectTab()">' + event.target.textContent.trim() +
+        ' <img src="img/cancel.svg" onclick="cancelTab()" ' +
         'onmouseout="cancelOut()" onmouseover="cancelOver()"></div>';
 }
 
@@ -346,13 +348,29 @@ function newTab() {
 document.getElementsByClassName('tab')[0].style.background = '#B5B9E1';
 function selectTab() {
     let allTabs = [];
-    allTabs = document.getElementsByClassName('tab');
 
+    allTabs = document.getElementsByClassName('tab');
     for (let i = 0; i < allTabs.length; i++) {
         allTabs[i].style.background = '#D9DDFF';
     }       // #D9DDFF
     event.target.style.background = '#B5B9E1';
     chatRoomNow = event.target.textContent.trim();
+    if (chatRoomNow == 'MAIN') {
+        document.getElementById('notification').style.display = 'none';
+        messages.push(''); // для прохождения проверки
+        return displayMessages();
+    }
+    let messageDate = new Date();
+    messageDate = ('0' + messageDate.getHours()).slice(-2) + ':' + ('0' + messageDate.getMinutes()).slice(-2);
+    document.getElementById('messages-container').innerHTML = '';
+    document.getElementById('messages-container').innerHTML +='<div class="name">' + chatRoomNow + '</div>' +
+        '<div class="message left">Привет)<br><span class="date">' + messageDate + '</span></div>';
+    document.getElementById('messages-container').innerHTML +='<div class="message left">Как дела?<br><span class="date">' +
+        messageDate + '</span></div>';
+    document.getElementById('messages-container').innerHTML +='<div class="message left">Не хочешь сегодня куда-нибудь сходить?<br><span class="date">' +
+        messageDate + '</span></div>';
+    document.getElementById('messages-container').innerHTML +='<div class="message left">У меня сегодня день свободен, не хочу дома сидеть <img ><br><span class="date">' +
+        messageDate + '</span></div>';
 }
 
 function cancelTab() {
@@ -365,11 +383,16 @@ function cancelEnd() {
     let allTabs = document.getElementsByClassName('tab');
     allTabs[allTabs.length - 1].style.background = '#B5B9E1';
     chatRoomNow = allTabs[allTabs.length - 1].textContent.trim();
+    if (document.getElementById('tabs').childElementCount == 1) {
+        chatRoomNow = 'MAIN';
+        document.getElementById('notification').style.display = 'none';
+        messages.push(''); // для прохождения проверки
+        displayMessages();
+    }
 }
 
 //для textarea
 function bold() {
-
     document.getElementById('text').value += '<b></b>';
     document.getElementById('text').focus();
     document.getElementById('text').setSelectionRange(document.getElementById('text').value.length - 4,
@@ -444,6 +467,13 @@ function sendMessage() {
     words = 0;
     document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
 
+    if (chatRoomNow != 'MAIN') {
+        document.getElementById('text').value = '';
+        document.getElementById('space').innerHTML = 0;
+        document.getElementById('allChars').innerHTML = 0;
+        document.getElementById('stopChars').innerHTML = 0;
+        return document.getElementById('letters').innerHTML = 0;
+    }
     let date = new Date().toISOString();
     messages.push({"user_id":userNowId,"message":document.getElementById('text').value,"chatroom_id":chatRoomNow,"datetime":date});
 
@@ -494,8 +524,11 @@ function displayMessages() {
                 }
             )
 
-            if (usersGet.length == messages.length) return continueDo = false;
-
+            if (usersGet.length == messages.length && messages[messages.length - 1] != '') return continueDo = false;
+            if (chatRoomNow != 'MAIN') {
+                continueDo = false;
+                return document.getElementById('notification').style.display = "inline";
+            }
             messages = [];
             for (let i = 0; i < usersGet.length; i++) {
                 messages.push({});
@@ -515,6 +548,7 @@ function displayMessages() {
     request.send();
 
     if (continueDo == false) return;
+
     document.getElementById('messages-container').innerHTML = "";
     for (let i = 0; i < messages.length; i++) {
         let date = Date.parse(messages[i].datetime);

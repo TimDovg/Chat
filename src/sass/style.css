@@ -451,6 +451,11 @@ hr {
     border-radius: 42%;
 }
 
+#notification {
+    display: none;
+    background: rgba(0, 0, 0, 0) !important;
+}
+
 
 /*for registration*/
 form {
